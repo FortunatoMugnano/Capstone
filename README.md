@@ -18,7 +18,7 @@ REMIND ME TO FOLLOW UP this feature will set up an automatic message on the user
 
 ## MVP DEFINITION
 
-1. User-specific Application for Users to keeping track of job searches in a simple, organize journal/blog   
+1. User-specific Application for Users to keeping track of job searches in a simple, organized journal/blog   
 
 1. User-specific view of different sections in a single page  
 
