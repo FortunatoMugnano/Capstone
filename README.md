@@ -1,79 +1,44 @@
-# Fullstack_Boilerplate
-
-This is starting template for .NET students who would like to make a client/server application for their final capstone. This project includes roughly the same functionality that comes with a MVC authentication template. It includes basic username and password authentication. 
-
-If you haven't discussed JSON Web Tokens (JWTs) in class, be sure to go over this and refresh tokens with your instructor before using this template. You will not need to worry about the implementation of the JWTs, but it _is_ important that you understand how they work on a high level to be able to use them. You might also find this [video](https://www.youtube.com/watch?v=7Q17ubqLfaM) helpful
+# PROJECT NAME
+ENTER-Q!
 
 
-## What this template includes
+# APP OVERVIEW
 
-- React client with bare bones Login and Registration components
-- Basic ApplicationUser model
-- Swagger API documentation (can be seen by going to `localhost:<port>/swagger` while running the app)
+ENTER-Q! is an app where users can keep tracking of their personal job searches. There are different sections:  DREAM JOB where users can add the jobs they would love to apply and maybe obtain! When they decide to apply to any job, the APPLIED JOB section is where the "Job Card" will be moved. In this section, whenever the users click on Details for any single "Job Card", there will be two buttons: one to be used if the recruiter/employer has rejected your application,  and the other one if they offer you an interview. In the case of a rejection, the Job Card will be moved to the REJECTED section. Otherwise, if they offer you an interview, this will be moved to the INTERVIEW section. When the users are in the INTERVIEW section, other two buttons will be presented. If the users click on GOT AN OFFER, that means they have received one! In this part of the App, they can also contribute to add comments about the interview(s) and the hiring process if they desire. This is the last section of my app, here they can provide the informations about the salary, if not specified at the beginning, and some notes about the entire hiring process. Two more features will be:  
 
-## Steps to set up
+COMMENT & COMPANIES section: here the users can search for different comments related to a single company
 
-1. Right click the project name in Solution Explorer and click "Manage User Secrets". This will open a `secrets.json` file. Replace the contents of the file with the following code. Then replace the `Secret` value with any random 32 character string that you pick out 
-  ```json
-  {
-    "JwtSettings": {
-      "Secret": "R7e60wQzebxYbxZTbQPdpQ4kxBTAM7SJ"
-    }
-  }
-  ```
+REMIND ME TO FOLLOW UP this feature will set up an automatic message on the users home page. The message will remind them to follow up to the company/recruiter after a week of their interview
 
-1. Go into `Models.Data.ApplicationUser`. It inherits from `IdentityUser` and currently adds `FirstName` `LastName` and `StreetAddress` as additional profile information. Feel free to remove any of these properties or add additional ones that suit the needs of your application.
+## TECHNOLOGIES USED
 
-1. Because `IdentityUser` contains sensitive information like emails and passwords, we _never_ want to return the full user object as part of a JSON response. When you send user data as JSON, be sure to send back a view model instead. There is a class for you to start with called `ApplicationUserViewModel`. Modify it to include whatever user properties your React client will need (you can always change this later). Keep in mind that this means that you will _always_ need to convert the user **data model** to the user **view model**. How and where you do this is up to you.
+- React client side with Ant Design Css Framework
+- Entity and Identity Framework for Database 
+- .Net Core 
 
-1. If you want to capture additional info when the user registers, update `UserRegistrationViewModel` to include the necessary properties.
+## MVP DEFINITION
 
-1. Add a migration and run `Update-Database`
+1. User-specific Application for Users to keeping track of job searches in a simple, organize journal/blog   
 
-1. Start the server in Visual Studio. Then in your terminal, `cd` into the `/client` directory and run `npm start`. You're now running both the ASP.NET API server and the react dev server. You can work in whatever editor/IDE you like, but you may find that it's easiest to write your javascript code in VS Code and your C# code in Visual Studio.
+1. User-specific view of different sections in a single page  
 
-## Things to note (C#)
+1. Entity-Framework Database  within React for Client-side 
 
-- To get the user's ID in your API controller, you can use the `HttpContext.GetUserId()` method. (You'll need to add a `using` statement the first time you use this)
+1. CRUD functionalities for job search posting, companies  and comments   
 
-```csharp
-var userId = HttpContext.GetUserId();
-```
+## STRETCH GOAL
 
-- If for some reason you need the whole user object in your API controller, you can inject an `IUserService` object into your constructor. The `IUserService` has a `GetUserAsync` method.
+- Use of the Indeed or Glassdoor API to give the opportunity for the users to search for jobs and comments about different companies(only with Glassdoor API) 
 
-```csharp
-private readonly IUserService _userService;
+## ERD
 
-public ValuesController(IUserService userService)
-{
-    _userService = userService;
-}
+![ERD](/ReadMePictures/ERDCapstone.png)
 
-public async Task<IActionResult> Get()
-{
-    var user = await _userService.GetUserAsync(HttpContext.GetUserId());
-    
-    ...
-}
-```
+## MOCK-UP/WIREFRAMES
 
-## Things to note (React)
+![mkup](/ReadMePictures/IMG_1.JPG)
+![mkup](/ReadMePictures/IMG_2.JPG)
+![mkup](/ReadMePictures/IMG_3.JPG)
+![mkup](/ReadMePictures/IMG_4.JPG)
+![mkup](/ReadMePictures/IMG_5.JPG)
 
-- The template includes a `userManager.js` file that exports some functions that will be helpful.
-  - `login`: returns a promise of a user object. Throws error if unsuccessful
-  - `register`: returns a promise of a user object. Throws error if unsuccessful
-  - `getUser`: returns user object from local storage
-  - `removeUser`: removes user from local storage
-  - `createAuthHeaders`: returns object that contains Authorization headers. This will need to be used whenever requesting user specific data. Example usage:
-  
-  ```js
-  componentDidMount() {
-    const authHeader = createAuthHeaders();
-    fetch('/api/v1/values', {
-      headers: authHeader
-    })
-      .then(response => response.json())
-      .then(values => this.setState({ values: values }));
-  }
-  ```
