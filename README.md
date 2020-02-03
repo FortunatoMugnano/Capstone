@@ -24,7 +24,7 @@ REMIND ME TO FOLLOW UP this feature will set up an automatic message on the user
 
 1. Entity-Framework Database  within React for Client-side 
 
-1. CRUD functionalities for job search, companies and comments   
+1. CRUD functionalities for job search posting, companies  and comments   
 
 ## STRETCH GOAL
 
