@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { createAuthHeaders } from '../API/userManager';
+import commentManager from '../API/commentManager'
 
 class Home extends Component {
   state = {
-    values: [],
+    comments: [],
   }
 
   componentDidMount() {
     const authHeader = createAuthHeaders();
-    fetch('/api/v1/values', {
-      headers: authHeader
-    })
-      .then(response => response.json())
-      .then(values => {
-        this.setState({ values: values });
+
+    commentManager.getComments(authHeader)
+      .then(comments => {
+       
+        this.setState({ comments: comments });
       });
   }
 
@@ -23,7 +23,7 @@ class Home extends Component {
         <h1>Welcome to my app</h1>
         <ul>
           {
-            this.state.values.map(value => <li>{value}</li>)
+  this.state.comments.map(comment => <li>{comment.text} from the Company {comment.name}</li>)
           }
         </ul>
       </>

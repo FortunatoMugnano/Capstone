@@ -17,6 +17,12 @@ namespace Capstone.Routes.V1
             public const string Get = Base + "/Values/{id}";
         }
 
+        public static class Comments
+        {
+            public const string GetAll = Base + "/Comments";
+            public const string Get = Base + "/Comments/{id}";
+        }
+
         public static class User
         {
             public const string Login = Base + "/Auth/Login";
