@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Redirect, BrowserRouter as Router, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Login from './components/Login';
-import Register from './components/Register';
+import NavBar from './components/Nav/NavBar';
+import Login from './components/Auth/Login';
+import Register from './components/Auth/Register';
 import Home from './components/Home';
 import { getUser, removeUser } from './API/userManager';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class App extends Component {
   state = {
@@ -21,7 +23,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Header user={this.state.user} logout={this.logout} />
+          <NavBar user={this.state.user} logout={this.logout} />
           <Route exact path="/login" render={() => (
             <Login onLogin={(user) => this.setState({ user })} />
           )} />

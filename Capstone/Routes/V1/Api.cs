@@ -21,6 +21,28 @@ namespace Capstone.Routes.V1
         {
             public const string GetAll = Base + "/Comments";
             public const string Get = Base + "/Comments/{id}";
+            public const string Post = Base + "/Comments";
+            public const string Edit = Base + "/Comments/{id}";
+            public const string Delete = Base + "/Comments/{id}";
+            
+        }
+
+        public static class Jobs
+        {
+            public const string GetAll = Base + "/Jobs";
+            public const string Get = Base + "/Jobs/{id}";
+            public const string Post = Base + "/Jobs";
+            public const string Edit = Base + "/Jobs/{id}";
+            public const string Delete = Base + "/Jobs/{id}";
+        }
+
+        public static class Company
+        {
+            public const string GetAll = Base + "/Companies";
+            public const string Get = Base + "/Companies/{id}";
+            public const string Post = Base + "/Companies";
+            public const string Edit = Base + "/Companies/{id}";
+            public const string Delete = Base + "/Companies/{id}";
         }
 
         public static class User

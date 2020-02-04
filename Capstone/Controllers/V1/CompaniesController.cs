@@ -8,41 +8,32 @@ using Microsoft.EntityFrameworkCore;
 using Capstone.Data;
 using Capstone.Models.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authorization;
 using Capstone.Routes.V1;
 
 namespace Capstone.Controllers.V1
 {
     [ApiController]
-    [Authorize]
-    
-    public class CommentsController : ControllerBase
+    public class CompaniesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
+        
 
-        public CommentsController(ApplicationDbContext context)
+        public CompaniesController(ApplicationDbContext context)
         {
             _context = context;
-           
+          
         }
 
-
-        // GET: Comments
-        [HttpGet(Api.Comments.GetAll)]
+        // GET: Companies
+        [HttpGet(Api.Company.GetAll)]
         public async Task<IActionResult> Index()
         {
-           
-            var applicationDbContext = _context.Comment.Include(c => c.Company).Include(c => c.User).Select((comment) => new {
-                comment.Text, 
-                comment.Company.Name 
-            });
-            return Ok(applicationDbContext);
+            var applicationDbContext = _context.Company.Include(c => c.User);
+            return Ok(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Comments/Details/5
-
-        [HttpGet(Api.Comments.Get)]
+        // GET: Companies/Details/5
+        [HttpGet(Api.Company.Get)]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,47 +41,45 @@ namespace Capstone.Controllers.V1
                 return NotFound();
             }
 
-            var comment = await _context.Comment
-                .Include(c => c.Company)
+            var company = await _context.Company
                 .Include(c => c.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (comment == null)
+            if (company == null)
             {
                 return NotFound();
             }
 
-            return Ok(comment);
+            return Ok(company);
         }
 
-        
        
 
-        // POST: Comments/Create
+        // POST: Companies/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost(Api.Comments.Post)]
-        
-        public async Task<IActionResult> Create([Bind("Id,Text,ApplicationUserId,CompanyId")] Comment comment)
+        [HttpPost(Api.Company.Post)]
+    
+        public async Task<IActionResult> Create([Bind("Id,Name,Website,Country,City,ZipCode,Address,Founded,ApplicationUserId")] Company company)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(comment);
+                _context.Add(company);
                 await _context.SaveChangesAsync();
                 
             }
-           
-            return Ok(comment);
+            
+            return Ok(company);
         }
 
-        
-        // POST: Comments/Edit/5
+      
+
+        // POST: Companies/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPut(Api.Comments.Edit)]
-    
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Text,ApplicationUserId,CompanyId")] Comment comment)
+        [HttpPut(Api.Company.Edit)]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Website,Country,City,ZipCode,Address,Founded,ApplicationUserId")] Company company)
         {
-            if (id != comment.Id)
+            if (id != company.Id)
             {
                 return NotFound();
             }
@@ -99,12 +88,12 @@ namespace Capstone.Controllers.V1
             {
                 try
                 {
-                    _context.Update(comment);
+                    _context.Update(company);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CommentExists(comment.Id))
+                    if (!CompanyExists(company.Id))
                     {
                         return NotFound();
                     }
@@ -113,31 +102,30 @@ namespace Capstone.Controllers.V1
                         throw;
                     }
                 }
-                
+                return RedirectToAction(nameof(Index));
             }
            
-            return Ok(comment);
+            return Ok(company);
         }
 
-        
-
-        // POST: Comments/Delete/5
-        [HttpDelete(Api.Comments.Delete)]
        
+
+        // POST: Companies/Delete/5
+        [HttpDelete(Api.Company.Delete)]
+        
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comment = await _context.Comment.FindAsync(id);
-            _context.Comment.Remove(comment);
+            var company = await _context.Company.FindAsync(id);
+            _context.Company.Remove(company);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
         
 
-        private bool CommentExists(int id)
+        private bool CompanyExists(int id)
         {
-            return _context.Comment.Any(e => e.Id == id);
+            return _context.Company.Any(e => e.Id == id);
         }
-
         
     }
 }
