@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Capstone.Models.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Capstone.Models.Data
+namespace Capstone.Models.ViewModels
 {
-    public class Company
+    public class CompanyViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -19,7 +20,7 @@ namespace Capstone.Models.Data
         public string ApplicationUserId { get; set; }
         public ApplicationUser User { get; set; }
         public List<Comment> Comments { get; set; }
-        public List<CompanyType> CompanyTypes { get; set; }
 
+        public List<int> IndustryTypeIds { get; set; }
     }
 }

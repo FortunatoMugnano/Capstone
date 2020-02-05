@@ -4,7 +4,8 @@ import { Nav } from "react-bootstrap";
 
 
 
-export default function Navbar()  {
+
+export default function Navbar(props)  {
   
 
 
@@ -12,17 +13,31 @@ export default function Navbar()  {
   
       return (
         <Nav defaultActiveKey="/" as="ul">
-        <Nav.Item as="li">
-          <Nav.Link href="/">Active</Nav.Link>
-        </Nav.Item>
-        <Nav.Item as="li">
-          <Nav.Link eventKey="link-1">Link</Nav.Link>
-        </Nav.Item>
-        <Nav.Item as="li">
-          <Nav.Link eventKey="link-2">Link</Nav.Link>
-        </Nav.Item>
-      </Nav>
-    //<nav className="header">
+        
+          {
+            props.user ? (
+              <>
+              <Nav.Item as="li">
+              <Nav.Link href="/">Hello {props.user.username}</Nav.Link>
+              </Nav.Item>
+              <Nav.Item as="li" onClick={props.logout}>
+              <Nav.Link eventKey="link-1">Log out</Nav.Link>
+              </Nav.Item>
+             </>
+            ) : (
+              <>
+             <Nav.Item as="li">
+             <Nav.Link eventKey="/login">Login</Nav.Link>
+             </Nav.Item>
+             <Nav.Item as="li">
+             <Nav.Link eventKey="/register">Register</Nav.Link>
+             </Nav.Item>
+             </>
+            )
+          }
+        </Nav>
+
+       //<nav className="header">
      // <ul className="nav-items">
       //  {
      //     props.user ? (

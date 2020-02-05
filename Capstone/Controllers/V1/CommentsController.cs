@@ -10,6 +10,7 @@ using Capstone.Models.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Capstone.Routes.V1;
+using Capstone.Helpers;
 
 namespace Capstone.Controllers.V1
 {
@@ -19,7 +20,7 @@ namespace Capstone.Controllers.V1
     public class CommentsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
+      
 
         public CommentsController(ApplicationDbContext context)
         {
@@ -32,11 +33,15 @@ namespace Capstone.Controllers.V1
         [HttpGet(Api.Comments.GetAll)]
         public async Task<IActionResult> Index()
         {
-           
-            var applicationDbContext = _context.Comment.Include(c => c.Company).Include(c => c.User).Select((comment) => new {
+
+            var applicationDbContext = _context.Comment.Include(c => c.Company).Include(c => c.User)
+                .Select((comment) => new {
                 comment.Text, 
-                comment.Company.Name 
+                comment.Company,
+                comment.Id
+              
             });
+              
             return Ok(applicationDbContext);
         }
 
@@ -53,6 +58,12 @@ namespace Capstone.Controllers.V1
             var comment = await _context.Comment
                 .Include(c => c.Company)
                 .Include(c => c.User)
+                .Select((comment) => new {
+                    comment.Text,
+                    comment.Company,
+                    comment.Id
+
+                })
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (comment == null)
             {
@@ -72,6 +83,8 @@ namespace Capstone.Controllers.V1
         
         public async Task<IActionResult> Create([Bind("Id,Text,ApplicationUserId,CompanyId")] Comment comment)
         {
+            var userId = HttpContext.GetUserId();
+            comment.ApplicationUserId = userId;
             if (ModelState.IsValid)
             {
                 _context.Add(comment);
@@ -95,6 +108,8 @@ namespace Capstone.Controllers.V1
                 return NotFound();
             }
 
+            var userId = HttpContext.GetUserId();
+            comment.ApplicationUserId = userId;
             if (ModelState.IsValid)
             {
                 try
