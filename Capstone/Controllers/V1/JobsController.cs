@@ -29,7 +29,7 @@ namespace Capstone.Controllers.V1
 
         // GET: Jobs
 
-        [AllowAnonymous]
+       
         [HttpGet(Api.Jobs.GetAll)]
         public async Task<IActionResult> Index()
         {
@@ -40,7 +40,7 @@ namespace Capstone.Controllers.V1
         }
 
         // GET: Jobs/Details/5
-        [AllowAnonymous]
+       
         [HttpGet(Api.Jobs.Get)]
         public async Task<IActionResult> Details(int? id)
         {
@@ -147,7 +147,7 @@ namespace Capstone.Controllers.V1
        
 
         // POST: Jobs/Delete/5
-        [AllowAnonymous]
+        
         [HttpDelete(Api.Jobs.Delete)]
        
        public async Task<IActionResult> DeleteConfirmed(int id)

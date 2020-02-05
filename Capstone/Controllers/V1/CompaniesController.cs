@@ -9,10 +9,14 @@ using Capstone.Data;
 using Capstone.Models.Data;
 using Microsoft.AspNetCore.Identity;
 using Capstone.Routes.V1;
+using Microsoft.AspNetCore.Authorization;
+using Capstone.Helpers;
+using Capstone.Models.ViewModels;
 
 namespace Capstone.Controllers.V1
 {
     [ApiController]
+    [Authorize]
     public class CompaniesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -28,7 +32,28 @@ namespace Capstone.Controllers.V1
         [HttpGet(Api.Company.GetAll)]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Company.Include(c => c.User);
+            var userId = HttpContext.GetUserId();
+            
+            var applicationDbContext = _context.Company.Include(c => c.User)
+                .Include(c => c.Comments)
+                .Include(c => c.CompanyTypes)
+                        .ThenInclude(bg => bg.IndustryType)
+                .Select((company) => new
+            {
+              
+              company.Id,
+              company.Founded,
+              company.Country,
+              company.Name,
+              company.ZipCode,
+              company.Website,
+              company.Address,
+              company.City,
+              company.CompanyTypes,
+              company.Comments
+              
+                });
+            
             return Ok(await applicationDbContext.ToListAsync());
         }
 
@@ -41,8 +66,25 @@ namespace Capstone.Controllers.V1
                 return NotFound();
             }
 
+            var userId = HttpContext.GetUserId();
             var company = await _context.Company
                 .Include(c => c.User)
+                .Include(c => c.CompanyTypes)
+                        .ThenInclude(bg => bg.IndustryType)
+                .Select((company) => new
+                {
+                    
+                    company.Id,
+                    company.Founded,
+                    company.Country,
+                    company.Name,
+                    company.ZipCode,
+                    company.Website,
+                    company.Address,
+                    company.City,
+                    company.CompanyTypes,
+                    company.Comments
+                })
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (company == null)
             {
@@ -59,16 +101,36 @@ namespace Capstone.Controllers.V1
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost(Api.Company.Post)]
     
-        public async Task<IActionResult> Create([Bind("Id,Name,Website,Country,City,ZipCode,Address,Founded,ApplicationUserId")] Company company)
+        public async Task<IActionResult> Create([Bind("Id,Name,Website,Country,City,ZipCode,Address,Founded,ApplicationUserId,IndustryTypeIds")] CompanyViewModel companyViewModel)
         {
+            var userId = HttpContext.GetUserId();
+            companyViewModel.ApplicationUserId = userId;
             if (ModelState.IsValid)
             {
-                _context.Add(company);
+                var companyDataModel = new Company
+                {
+                    Name = companyViewModel.Name,
+                    Website = companyViewModel.Website,
+                    Country = companyViewModel.Country,
+                    City = companyViewModel.City,
+                    ZipCode = companyViewModel.ZipCode,
+                    Address = companyViewModel.Address,
+                    Founded = companyViewModel.Founded,
+                    ApplicationUserId = userId
+                };
+                _context.Add(companyDataModel);
                 await _context.SaveChangesAsync();
-                
+
+                companyDataModel.CompanyTypes = companyViewModel.IndustryTypeIds.Select(companyTypeId => new CompanyType
+                {
+                    CompanyId = companyDataModel.Id,
+                    IndustryTypeId = companyTypeId
+                }).ToList();
+
+                await _context.SaveChangesAsync();
             }
             
-            return Ok(company);
+            return Ok(companyViewModel);
         }
 
       
@@ -77,23 +139,44 @@ namespace Capstone.Controllers.V1
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPut(Api.Company.Edit)]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Website,Country,City,ZipCode,Address,Founded,ApplicationUserId")] Company company)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Website,Country,City,ZipCode,Address,Founded,ApplicationUserId,IndustryTypeIds")] CompanyViewModel companyViewModel)
         {
-            if (id != company.Id)
+            if (id != companyViewModel.Id)
             {
                 return NotFound();
             }
 
+            var userId = HttpContext.GetUserId();
+            companyViewModel.ApplicationUserId = userId;
             if (ModelState.IsValid)
             {
+                var companyDataModel = await _context.Company
+                    .Include(c => c.CompanyTypes)
+                    .FirstOrDefaultAsync(c => c.Id == id);
+
+                companyDataModel.Id = companyViewModel.Id;
+                companyDataModel.Name = companyViewModel.Name;
+                companyDataModel.Website = companyViewModel.Website;
+                companyDataModel.Country = companyViewModel.Country;
+                companyDataModel.City = companyViewModel.City;
+                companyDataModel.ZipCode = companyViewModel.ZipCode;
+                companyDataModel.Address = companyViewModel.Address;
+                companyDataModel.Founded = companyViewModel.Founded;
+                companyDataModel.ApplicationUserId = userId;
+                companyDataModel.CompanyTypes = companyViewModel.IndustryTypeIds.Select(companyTypeId => new CompanyType
+                {
+                    CompanyId = companyDataModel.Id,
+                    IndustryTypeId = companyTypeId
+                }).ToList();
+
                 try
                 {
-                    _context.Update(company);
+                    _context.Update(companyDataModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CompanyExists(company.Id))
+                    if (!CompanyExists(companyViewModel.Id))
                     {
                         return NotFound();
                     }
@@ -105,7 +188,7 @@ namespace Capstone.Controllers.V1
                 return RedirectToAction(nameof(Index));
             }
            
-            return Ok(company);
+            return Ok(companyViewModel);
         }
 
        

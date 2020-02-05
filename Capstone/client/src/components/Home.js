@@ -13,7 +13,7 @@ class Home extends Component {
 
     commentManager.getComments(authHeader)
       .then(comments => {
-       
+       console.log(comments)
         this.setState({ comments: comments });
       });
   }
@@ -24,7 +24,7 @@ class Home extends Component {
         <h1>Welcome to my app</h1>
         <ul>
           {
-           this.state.comments.map(comment => <li>{comment.text} from the Company {comment.name}</li>)
+  this.state.comments.map(comment => <li>{comment.text} from the Company {comment.Company}</li>)
           }
         </ul>
       </>

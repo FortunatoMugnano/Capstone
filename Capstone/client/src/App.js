@@ -23,11 +23,11 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <NavBar user={this.state.user} logout={this.logout} />
+          <NavBar user={this.state.user} logout={this.logout} {...this.props}/>
           <Route exact path="/login" render={() => (
             <Login onLogin={(user) => this.setState({ user })} />
           )} />
-          <Route exact path="/register" render={() => (
+          <Route exact path="/register" render={() =>  (
             <Register onLogin={(user) => this.setState({ user })} />
           )} />
           <Route exact path="/" render={() => {
