@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,6 +21,7 @@ namespace Capstone.Models.Data
         public ApplicationUser User { get; set; }
         public List<Comment> Comments { get; set; }
         public List<CompanyType> CompanyTypes { get; set; }
+        public CompanyType CompanyType { get; set; }
 
     }
 }

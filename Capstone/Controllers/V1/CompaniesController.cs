@@ -30,36 +30,69 @@ namespace Capstone.Controllers.V1
 
         // GET: Companies
         [HttpGet(Api.Company.GetAll)]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> GetAllCompanies([FromQuery]string q)
         {
-            var userId = HttpContext.GetUserId();
-            
-            var applicationDbContext = _context.Company.Include(c => c.User)
-                .Include(c => c.Comments)
-                .Include(c => c.CompanyTypes)
-                        .ThenInclude(bg => bg.IndustryType)
-                .Select((company) => new
+            if (!string.IsNullOrWhiteSpace(q))
             {
-              
-              company.Id,
-              company.Founded,
-              company.Country,
-              company.Name,
-              company.ZipCode,
-              company.Website,
-              company.Address,
-              company.City,
-              company.CompanyTypes,
-              company.Comments
-              
-                });
+                var userId = HttpContext.GetUserId();
+                var applicationDbContext = _context.Company.Include(c => c.User)
+                    .Include(c => c.Comments)
+                    .Include(c => c.CompanyTypes)
+                            .ThenInclude(bg => bg.IndustryType)
+                    .Where(c => c.CompanyType.IndustryType.Industry == "I.T.")
+                    .Select((company) => new
+                    {
+
+                        company.Id,
+                        company.Founded,
+                        company.Country,
+                        company.Name,
+                        company.ZipCode,
+                        company.Website,
+                        company.Address,
+                        company.City,
+                        //company.CompanyTypes,
+                        //company.Comments
+
+                    });
+
+                var companies = await applicationDbContext.ToListAsync();
+                return Ok(companies);
+
+
+            }
+
+            else
+            {
+                var userId = HttpContext.GetUserId();
+                var applicationDbContext = _context.Company.Include(c => c.User)
+                    .Include(c => c.Comments)
+                    .Include(c => c.CompanyTypes)
+                            .ThenInclude(bg => bg.IndustryType)
+                    .Select((company) => new
+                    {
+
+                        company.Id,
+                        company.Founded,
+                        company.Country,
+                        company.Name,
+                        company.ZipCode,
+                        company.Website,
+                        company.Address,
+                        company.City,
+                        company.CompanyTypes,
+                        company.Comments
+
+                    });
+                return Ok(await applicationDbContext.ToListAsync());
+            }
             
-            return Ok(await applicationDbContext.ToListAsync());
+            
         }
 
         // GET: Companies/Details/5
         [HttpGet(Api.Company.Get)]
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> GetOneCompany(int? id)
         {
             if (id == null)
             {
@@ -101,7 +134,7 @@ namespace Capstone.Controllers.V1
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost(Api.Company.Post)]
     
-        public async Task<IActionResult> Create([Bind("Id,Name,Website,Country,City,ZipCode,Address,Founded,ApplicationUserId,IndustryTypeIds")] CompanyViewModel companyViewModel)
+        public async Task<IActionResult> CreateCompany([Bind("Id,Name,Website,Country,City,ZipCode,Address,Founded,ApplicationUserId,IndustryTypeIds")] CompanyViewModel companyViewModel)
         {
             var userId = HttpContext.GetUserId();
             companyViewModel.ApplicationUserId = userId;
@@ -139,7 +172,7 @@ namespace Capstone.Controllers.V1
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPut(Api.Company.Edit)]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Website,Country,City,ZipCode,Address,Founded,ApplicationUserId,IndustryTypeIds")] CompanyViewModel companyViewModel)
+        public async Task<IActionResult> EditCompany(int id, [Bind("Id,Name,Website,Country,City,ZipCode,Address,Founded,ApplicationUserId,IndustryTypeIds")] CompanyViewModel companyViewModel)
         {
             if (id != companyViewModel.Id)
             {

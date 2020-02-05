@@ -21,9 +21,21 @@ namespace Capstone.Data
         public DbSet<IndustryType> IndustryType { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<JobStatus> JobStatus { get; set; }
+        public DbSet<CompanyType> CompanyType { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+           
+        
+            builder.Entity<CompanyType>()
+                .HasOne(bc => bc.Company)
+                .WithMany(b => b.CompanyTypes)
+                .HasForeignKey(bc => bc.CompanyId);
+            builder.Entity<CompanyType>()
+                .HasOne(bc => bc.IndustryType)
+                .WithMany(c => c.CompanyTypes)
+                .HasForeignKey(bc => bc.IndustryTypeId);
 
             //Create A new User
             ApplicationUser newUser = new ApplicationUser

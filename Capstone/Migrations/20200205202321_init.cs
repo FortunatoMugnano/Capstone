@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Capstone.Migrations
 {
-    public partial class firstMigrationDefault : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -264,7 +264,8 @@ namespace Capstone.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CompanyId = table.Column<int>(nullable: false),
-                    IndustryTypeId = table.Column<int>(nullable: false)
+                    IndustryTypeId = table.Column<int>(nullable: false),
+                    CompanyId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -275,6 +276,12 @@ namespace Capstone.Migrations
                         principalTable: "Company",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CompanyType_Company_CompanyId1",
+                        column: x => x.CompanyId1,
+                        principalTable: "Company",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_CompanyType_IndustryType_IndustryTypeId",
                         column: x => x.IndustryTypeId,
@@ -324,7 +331,7 @@ namespace Capstone.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "StreetAddress", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "8d227fd2-8240-4b03-8bc7-e1728f4bb798", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEBZO9Gs3wF4TOiF5yT3Gejux44NyY9GDIqMCxWfnyy1JB2aNIJi3n0M4aJ6a5lrX8g==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", null, false, "admin@admin.com" });
+                values: new object[] { "00000000-ffff-ffff-ffff-ffffffffffff", 0, "61483380-808c-485e-a080-2a360d182350", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEHMQ8d3mcnJ1H5K8+js6OL5KgKThl/G2UCV7EJrMXlFVXnQdCNBIzdcjhf8neycB8A==", null, false, "7f434309-a4d9-48e9-9ebb-8803db794577", null, false, "admin@admin.com" });
 
             migrationBuilder.InsertData(
                 table: "IndustryType",
@@ -384,15 +391,15 @@ namespace Capstone.Migrations
 
             migrationBuilder.InsertData(
                 table: "CompanyType",
-                columns: new[] { "Id", "CompanyId", "IndustryTypeId" },
+                columns: new[] { "Id", "CompanyId", "CompanyId1", "IndustryTypeId" },
                 values: new object[,]
                 {
-                    { 1, 1, 5 },
-                    { 2, 2, 12 },
-                    { 3, 2, 5 },
-                    { 4, 3, 5 },
-                    { 5, 3, 3 },
-                    { 6, 3, 10 }
+                    { 1, 1, null, 5 },
+                    { 2, 2, null, 12 },
+                    { 3, 2, null, 5 },
+                    { 4, 3, null, 5 },
+                    { 5, 3, null, 3 },
+                    { 6, 3, null, 10 }
                 });
 
             migrationBuilder.InsertData(
@@ -400,9 +407,9 @@ namespace Capstone.Migrations
                 columns: new[] { "Id", "ApplicationUserId", "CompanyId", "Date", "Description", "JobPostUrl", "JobStatusId", "Salary", "Title" },
                 values: new object[,]
                 {
-                    { 1, "00000000-ffff-ffff-ffff-ffffffffffff", 1, new DateTime(2020, 2, 5, 11, 28, 57, 951, DateTimeKind.Local).AddTicks(7257), "Be a good web developer", "www.google.it/career", 1, 0, ".Net Software Dev" },
-                    { 2, "00000000-ffff-ffff-ffff-ffffffffffff", 2, new DateTime(2020, 2, 5, 11, 28, 57, 957, DateTimeKind.Local).AddTicks(6385), "Be a good software developer", "www.HCA.it/career", 1, 0, "Full-Stack software engigneer" },
-                    { 3, "00000000-ffff-ffff-ffff-ffffffffffff", 3, new DateTime(2020, 2, 5, 11, 28, 57, 957, DateTimeKind.Local).AddTicks(6696), "Be a good React developer", "www.amazon.it/career", 1, 0, "React Junior Dev" }
+                    { 1, "00000000-ffff-ffff-ffff-ffffffffffff", 1, new DateTime(2020, 2, 5, 14, 23, 21, 343, DateTimeKind.Local).AddTicks(1350), "Be a good web developer", "www.google.it/career", 1, 0, ".Net Software Dev" },
+                    { 2, "00000000-ffff-ffff-ffff-ffffffffffff", 2, new DateTime(2020, 2, 5, 14, 23, 21, 345, DateTimeKind.Local).AddTicks(8516), "Be a good software developer", "www.HCA.it/career", 1, 0, "Full-Stack software engigneer" },
+                    { 3, "00000000-ffff-ffff-ffff-ffffffffffff", 3, new DateTime(2020, 2, 5, 14, 23, 21, 345, DateTimeKind.Local).AddTicks(8664), "Be a good React developer", "www.amazon.it/career", 1, 0, "React Junior Dev" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -463,6 +470,13 @@ namespace Capstone.Migrations
                 name: "IX_CompanyType_CompanyId",
                 table: "CompanyType",
                 column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CompanyType_CompanyId1",
+                table: "CompanyType",
+                column: "CompanyId1",
+                unique: true,
+                filter: "[CompanyId1] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CompanyType_IndustryTypeId",

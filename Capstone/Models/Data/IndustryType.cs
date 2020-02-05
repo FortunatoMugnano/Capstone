@@ -12,5 +12,7 @@ namespace Capstone.Models.Data
 
         [Required]
         public string Industry { get; set; }
+
+        public List<CompanyType> CompanyTypes { get; set; }
     }
 }
