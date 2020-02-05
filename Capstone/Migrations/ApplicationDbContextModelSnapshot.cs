@@ -97,7 +97,7 @@ namespace Capstone.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8d227fd2-8240-4b03-8bc7-e1728f4bb798",
+                            ConcurrencyStamp = "61483380-808c-485e-a080-2a360d182350",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "admin",
@@ -105,7 +105,7 @@ namespace Capstone.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBZO9Gs3wF4TOiF5yT3Gejux44NyY9GDIqMCxWfnyy1JB2aNIJi3n0M4aJ6a5lrX8g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHMQ8d3mcnJ1H5K8+js6OL5KgKThl/G2UCV7EJrMXlFVXnQdCNBIzdcjhf8neycB8A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -248,12 +248,19 @@ namespace Capstone.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CompanyId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("IndustryTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("CompanyId1")
+                        .IsUnique()
+                        .HasFilter("[CompanyId1] IS NOT NULL");
 
                     b.HasIndex("IndustryTypeId");
 
@@ -426,7 +433,7 @@ namespace Capstone.Migrations
                             Id = 1,
                             ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
                             CompanyId = 1,
-                            Date = new DateTime(2020, 2, 5, 11, 28, 57, 951, DateTimeKind.Local).AddTicks(7257),
+                            Date = new DateTime(2020, 2, 5, 14, 23, 21, 343, DateTimeKind.Local).AddTicks(1350),
                             Description = "Be a good web developer",
                             JobPostUrl = "www.google.it/career",
                             JobStatusId = 1,
@@ -438,7 +445,7 @@ namespace Capstone.Migrations
                             Id = 2,
                             ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
                             CompanyId = 2,
-                            Date = new DateTime(2020, 2, 5, 11, 28, 57, 957, DateTimeKind.Local).AddTicks(6385),
+                            Date = new DateTime(2020, 2, 5, 14, 23, 21, 345, DateTimeKind.Local).AddTicks(8516),
                             Description = "Be a good software developer",
                             JobPostUrl = "www.HCA.it/career",
                             JobStatusId = 1,
@@ -450,7 +457,7 @@ namespace Capstone.Migrations
                             Id = 3,
                             ApplicationUserId = "00000000-ffff-ffff-ffff-ffffffffffff",
                             CompanyId = 3,
-                            Date = new DateTime(2020, 2, 5, 11, 28, 57, 957, DateTimeKind.Local).AddTicks(6696),
+                            Date = new DateTime(2020, 2, 5, 14, 23, 21, 345, DateTimeKind.Local).AddTicks(8664),
                             Description = "Be a good React developer",
                             JobPostUrl = "www.amazon.it/career",
                             JobStatusId = 1,
@@ -696,8 +703,12 @@ namespace Capstone.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Capstone.Models.Data.Company", null)
+                        .WithOne("CompanyType")
+                        .HasForeignKey("Capstone.Models.Data.CompanyType", "CompanyId1");
+
                     b.HasOne("Capstone.Models.Data.IndustryType", "IndustryType")
-                        .WithMany()
+                        .WithMany("CompanyTypes")
                         .HasForeignKey("IndustryTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
