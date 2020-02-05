@@ -1,32 +1,39 @@
 import React, { Component } from 'react';
 import { createAuthHeaders } from '../API/userManager';
-import commentManager from '../API/commentManager';
+import JobCard from '../components/Job/JobCard';
+import JobManager from '../API/JobManager';
+
+
 
 
 class Home extends Component {
   state = {
-    comments: [],
+    jobs: []
   }
 
   componentDidMount() {
     const authHeader = createAuthHeaders();
-
-    commentManager.getComments(authHeader)
-      .then(comments => {
-       console.log(comments)
-        this.setState({ comments: comments });
-      });
-  }
+    JobManager.getJobs(authHeader)
+        .then((jobs) => {
+            this.setState({
+                jobs: jobs
+            })
+        })
+}
 
   render() {
     return (
       <>
-        <h1>Welcome to my app</h1>
-        <ul>
-          {
-  this.state.comments.map(comment => <li>{comment.text} from the Company {comment.Company}</li>)
-          }
-        </ul>
+        <h1>Enter-Q!</h1>
+  
+        
+        <h1>Jobs</h1>
+        <div className="container-cards">
+                    {this.state.jobs.map(job =>
+                       
+                        <JobCard key={job.id} job={job}  {...this.props} />
+                    )}
+        </div>
       </>
     )
   }

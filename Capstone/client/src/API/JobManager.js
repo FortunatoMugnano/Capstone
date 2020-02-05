@@ -8,9 +8,11 @@ export default {
           })
             .then(result => result.json())
     },
-    getSingleJob(id) {
+    getSingleJob(id, authHeader) {
         return fetch
-        (`${baseUrl}/jobs/${id}`)
+        (`${baseUrl}/jobs/${id}`, {
+            headers: authHeader
+          })
             .then(result => result.json())
     },
     delete(id) {
@@ -34,7 +36,7 @@ export default {
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify(editedAnimal)
+          body: JSON.stringify(editedJob)
         }).then(data => data.json());
       }
 }

@@ -4,6 +4,7 @@ import NavBar from './components/Nav/NavBar';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Home from './components/Home';
+import JobDetails from './components/Job/JobDetails';
 import { getUser, removeUser } from './API/userManager';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -30,9 +31,15 @@ class App extends Component {
           <Route exact path="/register" render={() =>  (
             <Register onLogin={(user) => this.setState({ user })} />
           )} />
+          <Route exact path="/jobs/:jobId(\d+)" render={(props) => {
+                return <JobDetails jobId={parseInt(props.match.params.jobId)} {...this.props} />
+            }} />
           <Route exact path="/" render={() => {
             return this.state.user ? (
+              <>
               <Home />
+              
+            </>
             ) : <Redirect to="/login" />
           }} />
         </Router>
