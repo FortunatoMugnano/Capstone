@@ -33,9 +33,11 @@ namespace Capstone.Controllers.V1
         [HttpGet(Api.Jobs.GetAll)]
         public async Task<IActionResult> Index()
         {
+            var userId = HttpContext.GetUserId();
             var applicationDbContext = _context.Job.Include(j => j.Company)
                 .Include(j => j.JobStatus)
-                .Include(j => j.User);
+                .Include(j => j.User)
+                .Where(j => j.ApplicationUserId == userId);
             return Ok(await applicationDbContext.ToListAsync());
         }
 
@@ -48,11 +50,12 @@ namespace Capstone.Controllers.V1
             {
                 return NotFound();
             }
-
+            var userId = HttpContext.GetUserId();
             var job = await _context.Job
                 .Include(j => j.Company)
                 .Include(j => j.JobStatus)
                 .Include(j => j.User)
+                .Where(j => j.ApplicationUserId == userId)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (job == null)
             {
@@ -63,22 +66,7 @@ namespace Capstone.Controllers.V1
         }
 
 
-        /*
-        [HttpPost(Api.Jobs.Post)]
-        public async Task<ActionResult<Job>> PostJob(Job job)
-        {
-            var userId = HttpContext.GetUserId();
-            job.ApplicationUserId = userId;
-            _context.Job.Add(job);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("Index", new { id = job.Id }, job);
-        }
-        */
-        
-        // POST: Jobs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         
         [HttpPost(Api.Jobs.Post)]
         
@@ -89,6 +77,7 @@ namespace Capstone.Controllers.V1
 
             if (ModelState.IsValid)
             {
+                job.Date = DateTime.Now;
                 _context.Add(job);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -126,6 +115,7 @@ namespace Capstone.Controllers.V1
                 
                 try
                {
+                   // job.Date = DateTime.Now;
                     _context.Update(job);
                    await _context.SaveChangesAsync();
                }
@@ -150,12 +140,12 @@ namespace Capstone.Controllers.V1
         
         [HttpDelete(Api.Jobs.Delete)]
        
-       public async Task<IActionResult> DeleteConfirmed(int id)
+       public async Task<IActionResult> Delete(int id)
        {
            var job = await _context.Job.FindAsync(id);
            _context.Job.Remove(job);
            await _context.SaveChangesAsync();
-           return RedirectToAction(nameof(Index));
+           return Ok(job);
        }
        
 

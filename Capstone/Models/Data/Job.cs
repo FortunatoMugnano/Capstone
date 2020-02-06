@@ -16,7 +16,8 @@ namespace Capstone.Models.Data
 
         [Required]
         public string Description { get; set; }
-        public int Salary { get; set; }
+
+        public int? Salary { get; set; }
 
         [Required]
         public string JobPostUrl { get; set; }

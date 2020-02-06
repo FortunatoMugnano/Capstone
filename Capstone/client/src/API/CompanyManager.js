@@ -1,39 +1,39 @@
 const baseUrl = '/api/v1';
 
 export default {
-    getJobs(authHeader) {
+    getCompanies(authHeader) {
         return fetch
-        (`${baseUrl}/jobs/`, {
+        (`${baseUrl}/companies/`, {
             headers: authHeader
           })
             .then(result => result.json())
     },
-    getSingleJob(id, authHeader) {
+    getSingleCompany(id, authHeader) {
         return fetch
-        (`${baseUrl}/jobs/${id}`, {
+        (`${baseUrl}/companies/${id}`, {
             headers: authHeader
           })
             .then(result => result.json())
     },
     delete(id, authHeader) {
-        return fetch(`${baseUrl}/jobs/${id}`, {
+        return fetch(`${baseUrl}/companies/${id}`, {
             method: "DELETE",
             headers: authHeader
         })
-        .then(result => result.json())
+            .then(result => result.json())
     },
-    post(newJob, authHeader) {
-        return fetch(`${baseUrl}/jobs`, {
+    post(newCompany, authHeader) {
+        return fetch(`${baseUrl}/companies`, {
             method: "POST",
             headers: authHeader,
-            body: JSON.stringify(newJob)
+            body: JSON.stringify(newCompany)
         }).then(data => data.json())
     },
-    update(editedJob, authHeader) {
-        return fetch(`${baseUrl}/jobs/${editedJob.id}`, {
+    update(editedCompany, authHeader) {
+        return fetch(`${baseUrl}/companies/${editedCompany.id}`, {
           method: "PUT",
           headers: authHeader,
-          body: JSON.stringify(editedJob)
+          body: JSON.stringify(editedCompany)
         }).then(data => data.json());
       }
 }

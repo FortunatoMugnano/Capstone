@@ -34,27 +34,32 @@ namespace Capstone.Controllers.V1
         {
             if (!string.IsNullOrWhiteSpace(q))
             {
-                var userId = HttpContext.GetUserId();
+               
                 var applicationDbContext = _context.Company.Include(c => c.User)
+                    .Where(c => c.Name.Contains(q) || c.CompanyTypes.Any(ct => ct.IndustryType.Industry.Contains(q)))
                     .Include(c => c.Comments)
                     .Include(c => c.CompanyTypes)
                             .ThenInclude(bg => bg.IndustryType)
-                    .Where(c => c.CompanyType.IndustryType.Industry == "I.T.")
-                    .Select((company) => new
+                    .Select((company) => new CompanyResponseViewModel
                     {
 
-                        company.Id,
-                        company.Founded,
-                        company.Country,
-                        company.Name,
-                        company.ZipCode,
-                        company.Website,
-                        company.Address,
-                        company.City,
-                        //company.CompanyTypes,
-                        //company.Comments
+                        Id = company.Id,
+                        Founded = company.Founded,
+                        Country = company.Country,
+                        Name = company.Name,
+                        ZipCode = company.ZipCode,
+                        Website = company.Website,
+                        Address = company.Address,
+                        City = company.City,
+                        IndustryTypes = company.CompanyTypes.Select((industry) => new IndustryType
+                        {
+                            Id = industry.Id,
+                            Industry = industry.IndustryType.Industry
+                        }).ToList()
 
-                    });
+
+                    }) ;
+                    
 
                 var companies = await applicationDbContext.ToListAsync();
                 return Ok(companies);
@@ -69,19 +74,23 @@ namespace Capstone.Controllers.V1
                     .Include(c => c.Comments)
                     .Include(c => c.CompanyTypes)
                             .ThenInclude(bg => bg.IndustryType)
-                    .Select((company) => new
+                    .Select((company) => new CompanyResponseViewModel
                     {
 
-                        company.Id,
-                        company.Founded,
-                        company.Country,
-                        company.Name,
-                        company.ZipCode,
-                        company.Website,
-                        company.Address,
-                        company.City,
-                        company.CompanyTypes,
-                        company.Comments
+                        Id = company.Id,
+                        Founded = company.Founded,
+                        Country = company.Country,
+                        Name = company.Name,
+                        ZipCode = company.ZipCode,
+                        Website = company.Website,
+                        Address = company.Address,
+                        City = company.City,
+                        IndustryTypes = company.CompanyTypes.Select((industry) => new IndustryType
+                        {
+                            Id = industry.Id,
+                            Industry = industry.IndustryType.Industry
+                        }).ToList()
+
 
                     });
                 return Ok(await applicationDbContext.ToListAsync());
@@ -104,19 +113,24 @@ namespace Capstone.Controllers.V1
                 .Include(c => c.User)
                 .Include(c => c.CompanyTypes)
                         .ThenInclude(bg => bg.IndustryType)
-                .Select((company) => new
+                .Select((company) => new CompanyResponseViewModel
                 {
-                    
-                    company.Id,
-                    company.Founded,
-                    company.Country,
-                    company.Name,
-                    company.ZipCode,
-                    company.Website,
-                    company.Address,
-                    company.City,
-                    company.CompanyTypes,
-                    company.Comments
+
+                    Id = company.Id,
+                    Founded = company.Founded,
+                    Country = company.Country,
+                    Name = company.Name,
+                    ZipCode = company.ZipCode,
+                    Website = company.Website,
+                    Address = company.Address,
+                    City = company.City,
+                    IndustryTypes = company.CompanyTypes.Select((industry) => new IndustryType
+                    {
+                        Id = industry.Id,
+                        Industry = industry.IndustryType.Industry
+                    }).ToList()
+
+
                 })
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (company == null)

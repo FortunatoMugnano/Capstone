@@ -8,6 +8,7 @@ class JobCard extends Component {
                 <div className="card-content">
                     <h3> <span className="card-jobname">{this.props.job.title}</span></h3>
                     <p>{this.props.job.description}</p>
+                    <p>{this.props.job.company.name}</p>
                     <p>{this.props.job.jobStatus.status}</p>
                     <Link to={`/jobs/${this.props.job.id}`}><button>Details</button></Link>
                 </div>
