@@ -5,6 +5,9 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Home from './components/Home';
 import JobDetails from './components/Job/JobDetails';
+import FormJob from './components/Job/FormJob';
+import EditJobForm from './components/Job/EditJobForm';
+import CompanyList from './components/Company/CompanyList'
 import { getUser, removeUser } from './API/userManager';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -13,6 +16,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class App extends Component {
   state = {
     user: getUser(),
+    
   }
 
   logout = () => {
@@ -32,12 +36,21 @@ class App extends Component {
             <Register onLogin={(user) => this.setState({ user })} />
           )} />
           <Route exact path="/jobs/:jobId(\d+)" render={(props) => {
-                return <JobDetails jobId={parseInt(props.match.params.jobId)} {...this.props} />
+                return <JobDetails jobId={parseInt(props.match.params.jobId)} {...this.props} {...props} />
+            }} />
+          <Route exact path="/jobs/new" render={(props) => {
+                    return <FormJob {...props} />
+                }} />
+          <Route exact path="/jobs/:jobId(\d+)/edit" render={props => {
+              return <EditJobForm {...props} />
+          }} />
+           <Route exact path="/companies" render={(props) => {
+                return <CompanyList {...this.props} {...props} />
             }} />
           <Route exact path="/" render={() => {
             return this.state.user ? (
               <>
-              <Home />
+              <Home {...this.props} />
               
             </>
             ) : <Redirect to="/login" />

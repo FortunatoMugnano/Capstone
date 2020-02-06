@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import JobManager from '../../API/JobManager';
 import { createAuthHeaders } from '../../API/userManager';
+import { Link } from 'react-router-dom';
 
 
 
@@ -14,22 +15,21 @@ class JobDetails extends Component {
         jobPostUrl: "",
         date: "",
         companyName: "",
-        jobStatus: ""
+        jobStatus: "",
+        Id: ""
     }
 
     handleDelete = () => {
-     
+        const authHeader = createAuthHeaders();
         this.setState({ loadingStatus: true })
-        JobManager.delete(this.props.jobId)
+        JobManager.delete(this.props.jobId, authHeader)
             .then(() => this.props.history.push("/"))
     }
 
     componentDidMount() {
-        console.log("testing")
         const authHeader = createAuthHeaders();
         JobManager.getSingleJob(this.props.jobId, authHeader)
             .then((job) => {
-                console.log(job)
                 this.setState({
                     title: job.title,
                     description: job.description,
@@ -38,7 +38,8 @@ class JobDetails extends Component {
                     jobPostUrl: job.jobPostUrl,
                     date: job.date,
                     companyName: job.company.name,
-                    jobStatus: job.jobStatus.status
+                    jobStatus: job.jobStatus.status,
+                    Id: this.props.jobId
 
                 });
             });
@@ -55,10 +56,10 @@ class JobDetails extends Component {
                     <h3>Description: {this.state.description}</h3>
                     <h2>Salary : {this.state.salary}</h2>
                     <h2>Url: {this.state.jobPostUrl}</h2>
-                    <h2>Created : {this.state.date}</h2>
                     <h2>Company Name : {this.state.companyName}</h2>
                     <h2>Status : {this.state.jobStatus}</h2>
                     <button type="button" disabled={this.state.loadingStatus} onClick={this.handleDelete}>Delete</button>
+                    <Link to={`/jobs/${this.state.Id}/edit`}><button>Edit</button></Link>
                 </div>
             </div>
         );

@@ -28,6 +28,7 @@ class JobList extends Component {
 
            
             <>
+             
                 <div className="container-cards">
                     {this.state.jobs.map(job =>
                         <JobCard key={job.id} Id={job.Id} job={job}  {...this.props} />

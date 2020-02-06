@@ -21,7 +21,7 @@ namespace Capstone.Models.Data
         public ApplicationUser User { get; set; }
         public List<Comment> Comments { get; set; }
         public List<CompanyType> CompanyTypes { get; set; }
-        public CompanyType CompanyType { get; set; }
+      
 
     }
 }

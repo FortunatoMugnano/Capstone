@@ -20,6 +20,12 @@ export default function Navbar(props)  {
               <Nav.Item as="li">
               <Nav.Link href="/">Hello {props.user.username}</Nav.Link>
               </Nav.Item>
+              <Nav.Item as="li">
+              <Nav.Link href="/companies">Companies</Nav.Link>
+              </Nav.Item>
+              <Nav.Item as="li">
+              <Nav.Link href="/comments">Comments </Nav.Link>
+              </Nav.Item>
               <Nav.Item as="li" onClick={props.logout}>
               <Nav.Link eventKey="link-1">Log out</Nav.Link>
               </Nav.Item>
