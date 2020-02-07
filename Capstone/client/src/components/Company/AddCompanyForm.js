@@ -43,7 +43,6 @@ class AddCompanyForm extends Component {
         const authHeader = createAuthHeaders();
         IndustryTypeManager.getIndustryTypes(authHeader)
             .then((allIndustries) => {
-                console.log(allIndustries)
                 this.setState({
                     companyTypes: allIndustries
                 }
@@ -77,9 +76,9 @@ class AddCompanyForm extends Component {
 
         return (
             <>
-                <form>
-                    <fieldset>
-                        <div className="formgrid">
+                
+                    
+                        
                         <label htmlFor="name">Name </label>
                             <input type="text" required onChange={this.handleFieldChange} id="name" placeholder="Name" />
                             <label htmlFor="website">Web Site </label>
@@ -96,7 +95,6 @@ class AddCompanyForm extends Component {
                             <input type="date" required onChange={this.handleFieldChange} id="founded" placeholder="Founded" />
                             <label htmlFor="companyTypes">Company Types </label>
                             <Select isMulti isSearchable
-                                className="form-control"
                                 id="companyTypeId"
                                 value={this.state.industryTypeIds}
 
@@ -108,13 +106,13 @@ class AddCompanyForm extends Component {
                                
                                 
                             </Select>
-                        </div>
+                        
                         <div className="alignRight">
                             <button type="button" disabled={this.state.loadingStatus} onClick={this.constructNewCompany}>Add a Company
                             </button>
                         </div>
-                    </fieldset>
-                </form>
+                    
+                
             </>
         )
     }

@@ -54,7 +54,6 @@ class FormJob extends Component {
             companyId: parseInt(this.state.companyId),
             jobStatusId: this.state.jobStatusId
         };
-        console.log(job);
         JobManager.post(job, authHeader)
             .then(() => this.props.history.push("/"))
 

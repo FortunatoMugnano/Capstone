@@ -12,6 +12,7 @@ import AddCompanyForm from './components/Company/AddCompanyForm';
 import { getUser, removeUser } from './API/userManager';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import EditCompany from './components/Company/EditCompany';
 
 
 class App extends Component {
@@ -29,32 +30,37 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <NavBar user={this.state.user} logout={this.logout} {...this.props}/>
+          
           <Route exact path="/login" render={() => (
             <Login onLogin={(user) => this.setState({ user })} />
           )} />
           <Route exact path="/register" render={() =>  (
             <Register onLogin={(user) => this.setState({ user })} />
           )} />
-          <Route exact path="/jobs/:jobId(\d+)" render={(props) => {
+           <Route exact path="/jobs/:jobId(\d+)" render={(props) => {
                 return <JobDetails jobId={parseInt(props.match.params.jobId)} {...this.props} {...props} />
-            }} />
-          <Route exact path="/jobs/new" render={(props) => {
+              }} />
+              <Route exact path="/jobs/new" render={(props) => {
                     return <FormJob {...props} />
                 }} />
-          <Route exact path="/jobs/:jobId(\d+)/edit" render={props => {
+               <Route exact path="/jobs/:jobId(\d+)/edit" render={props => {
               return <EditJobForm {...props} />
-          }} />
-           <Route exact path="/companies" render={(props) => {
+               }} />
+                <Route exact path="/companies/:companyId(\d+)/edit" render={props => {
+              return <EditCompany companyId={parseInt(props.match.params.companyId)} {...this.props} {...props} />
+               }} />
+              <Route exact path="/companies" render={(props) => {
                 return <CompanyList {...this.props} {...props} />
-            }} />
-          <Route exact path="/companies/new" render={(props) => {
-                    return <AddCompanyForm {...props} />
-                }} />
+              }} />
+              <Route exact path="/companies/new" render={(props) => {
+                return <AddCompanyForm {...this.props} {...props} />
+              }} />
           <Route exact path="/" render={() => {
             return this.state.user ? (
               <>
+              <NavBar user={this.state.user} logout={this.logout} {...this.props}/>
               <Home {...this.props} />
+             
               
             </>
             ) : <Redirect to="/login" />
