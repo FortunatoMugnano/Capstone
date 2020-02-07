@@ -69,7 +69,7 @@ namespace Capstone.Controllers.V1
 
             else
             {
-                var userId = HttpContext.GetUserId();
+                
                 var applicationDbContext = _context.Company.Include(c => c.User)
                     .Include(c => c.Comments)
                     .Include(c => c.CompanyTypes)
@@ -108,9 +108,10 @@ namespace Capstone.Controllers.V1
                 return NotFound();
             }
 
-            var userId = HttpContext.GetUserId();
+            
             var company = await _context.Company
                 .Include(c => c.User)
+                .Include(c => c.Comments)
                 .Include(c => c.CompanyTypes)
                         .ThenInclude(bg => bg.IndustryType)
                 .Select((company) => new CompanyResponseViewModel
@@ -124,6 +125,7 @@ namespace Capstone.Controllers.V1
                     Website = company.Website,
                     Address = company.Address,
                     City = company.City,
+                    Comments = company.Comments,
                     IndustryTypes = company.CompanyTypes.Select((industry) => new IndustryType
                     {
                         Id = industry.Id,
@@ -232,7 +234,7 @@ namespace Capstone.Controllers.V1
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                
             }
            
             return Ok(companyViewModel);
@@ -248,7 +250,7 @@ namespace Capstone.Controllers.V1
             var company = await _context.Company.FindAsync(id);
             _context.Company.Remove(company);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Ok(company);
         }
         
 

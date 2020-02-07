@@ -33,7 +33,7 @@ class CompanyList extends Component {
              </section>
                 <div className="container-cards">
                     {this.state.companies.map(company =>
-                        <CompanyCard key={company.id} Id={company.Id} company={company}  {...this.props} />
+                        <CompanyCard key={company.id} Id={company.id} company={company}  {...this.props} />
                     )}
                 </div>
             </>
