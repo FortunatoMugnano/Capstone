@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createAuthHeaders } from '../API/userManager';
 import JobCard from '../components/Job/JobCard';
 import JobManager from '../API/JobManager';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
@@ -30,11 +30,8 @@ class Home extends Component {
         
         <h1>Jobs</h1>
 
-        <section className="section-content">
-                   
-           <Link to={'/jobs/new'}><button>Add a Job</button></Link>
-                        
-                    
+        <section className="section-content">           
+           <Link to={'/jobs/new'}><button>Add a Job</button></Link>       
         </section>
         <div className="container-cards">
                     {this.state.jobs.map(job =>
