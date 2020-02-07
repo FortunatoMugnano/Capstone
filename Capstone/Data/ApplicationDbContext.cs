@@ -37,6 +37,7 @@ namespace Capstone.Data
                 .WithMany(c => c.CompanyTypes)
                 .HasForeignKey(bc => bc.IndustryTypeId);
                 
+                
             //Create A new User
             ApplicationUser newUser = new ApplicationUser
             {

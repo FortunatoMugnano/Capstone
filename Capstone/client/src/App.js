@@ -7,7 +7,8 @@ import Home from './components/Home';
 import JobDetails from './components/Job/JobDetails';
 import FormJob from './components/Job/FormJob';
 import EditJobForm from './components/Job/EditJobForm';
-import CompanyList from './components/Company/CompanyList'
+import CompanyList from './components/Company/CompanyList';
+import AddCompanyForm from './components/Company/AddCompanyForm';
 import { getUser, removeUser } from './API/userManager';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -47,6 +48,9 @@ class App extends Component {
            <Route exact path="/companies" render={(props) => {
                 return <CompanyList {...this.props} {...props} />
             }} />
+          <Route exact path="/companies/new" render={(props) => {
+                    return <AddCompanyForm {...props} />
+                }} />
           <Route exact path="/" render={() => {
             return this.state.user ? (
               <>

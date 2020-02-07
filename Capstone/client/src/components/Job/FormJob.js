@@ -14,7 +14,6 @@ class FormJob extends Component {
         loadingStatus: false,
         jobPostUrl: "",
         companies: [],
-        //companyId: 0,
         jobStatusId: 1,
         
 
