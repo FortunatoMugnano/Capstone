@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import CommentManager from '../../API/CommentManager';
+import commentManager from '../../API/commentManager';
 import { createAuthHeaders } from '../../API/userManager';
 
 class CommentCard extends Component {
@@ -11,7 +11,7 @@ class CommentCard extends Component {
     handleDelete = () => {
         const authHeader = createAuthHeaders();
         this.setState({ loadingStatus: true })
-        CommentManager.delete(this.props.comment.id, authHeader)
+        commentManager.delete(this.props.comment.id, authHeader)
             .then(() => this.props.history.push("/companies"))
     }
 

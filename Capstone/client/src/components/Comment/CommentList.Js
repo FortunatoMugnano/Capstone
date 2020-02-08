@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CommentCard from './CommentCard'
-import CommentManager from '../../API/CommentManager';
+import commentManager from '../../API/commentManager';
 import { createAuthHeaders } from '../../API/userManager';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ class CommentList extends Component {
 
     componentDidMount() {
         const authHeader = createAuthHeaders();
-        CommentManager.getComments(authHeader)
+        commentManager.getComments(authHeader)
             .then((comments) => {
                 this.setState({
                     comments: comments
