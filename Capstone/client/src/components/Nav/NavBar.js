@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, BrowserRouter as Router, Route } from 'react-router-dom';
 import { Nav } from "react-bootstrap";
 
 
@@ -27,7 +27,7 @@ export default function Navbar(props)  {
               <Nav.Link href="/comments">Comments </Nav.Link>
               </Nav.Item>
               <Nav.Item as="li" onClick={props.logout}>
-              <Nav.Link eventKey="link-1">Log out</Nav.Link>
+              <Nav.Link eventKey="link-1" >Log out</Nav.Link>
               </Nav.Item>
              </>
             ) : (

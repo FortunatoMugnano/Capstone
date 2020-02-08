@@ -19,7 +19,9 @@ namespace Capstone.Models.ViewModels
         public int ZipCode { get; set; }
         public string Address { get; set; }
         public List<Comment> Comments { get; set; }
-
+        public ApplicationUser User { get; set; }
+       
+        public Comment Comment { get; set; }
         public List<IndustryType> IndustryTypes { get; set; }
     }
 }

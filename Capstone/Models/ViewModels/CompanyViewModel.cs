@@ -20,6 +20,7 @@ namespace Capstone.Models.ViewModels
         public string ApplicationUserId { get; set; }
      
         public List<Comment> Comments { get; set; }
+        public Comment Comment { get; set; }
 
         public List<int> IndustryTypeIds { get; set; }
     }

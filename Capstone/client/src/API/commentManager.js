@@ -11,10 +11,40 @@ export default {
           
         .then(response => response.json());
       },
+      getSingleComment(id, authHeader) {
+        return fetch(
+            `${baseUrl}/comments/${id}`, {
+              headers: authHeader
+            })
+        .then(response => response.json());
+    },
 
-      getSingleComment(id) {
+      getSingleCommentWithCompanies(id, authHeader) {
           return fetch(
-              `${baseUrl}/Comments/${id}`
-          ).then(response => response.json());
-      } 
+              `${baseUrl}/companies/${id}?=comments`, {
+                headers: authHeader
+              })
+          .then(response => response.json());
+      },
+      delete(id, authHeader) {
+        return fetch(`${baseUrl}/comments/${id}`, {
+            method: "DELETE",
+            headers: authHeader
+        })
+        .then(result => result.json())
+    },
+    post(newComment, authHeader) {
+        return fetch(`${baseUrl}/comments`, {
+            method: "POST",
+            headers: authHeader,
+            body: JSON.stringify(newComment)
+        }).then(data => data.json())
+    },
+    update(editedComment, authHeader) {
+        return fetch(`${baseUrl}/comments/${editedComment.id}`, {
+          method: "PUT",
+          headers: authHeader,
+          body: JSON.stringify(editedComment)
+        }).then(data => data.json());
+      }
   }
