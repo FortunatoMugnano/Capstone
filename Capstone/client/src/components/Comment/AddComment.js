@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CompanyManager from '../../API/CompanyManager';
-import CommentManager from '../../API/CommentManager';
+import commentManager from '../../API/commentManager';
 import { createAuthHeaders } from '../../API/userManager';
 
 
@@ -48,7 +48,7 @@ class AddComment extends Component {
             companyId:  parseInt(this.state.companyId),
             
         };
-        CommentManager.post(comment, authHeader)
+        commentManager.post(comment, authHeader)
             .then(() => this.props.history.push("/companies"))
 
 

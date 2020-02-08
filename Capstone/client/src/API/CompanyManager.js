@@ -35,5 +35,10 @@ export default {
           headers: authHeader,
           body: JSON.stringify(editedCompany)
         }).then(data => data.json());
+      },
+      findCompany(string, authHeader) {
+        return fetch(`${baseUrl}/companies?q=${string}`, {
+          headers: authHeader
+        }).then(result => result.json())
       }
 }

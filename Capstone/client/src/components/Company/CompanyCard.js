@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Link } from 'react-router-dom';
 import CompanyManager from '../../API/CompanyManager';
 import { createAuthHeaders } from '../../API/userManager';
-import CommentManager from '../../API/CommentManager';
+import CommentManager from '../../API/commentManager';
 
 class CompanyCard extends Component {
     state = {

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import CommentManager from '../../API/CommentManager'
+import commentManager from '../../API/commentManager'
 import CompanyManager from "../../API/CompanyManager"
 import { createAuthHeaders } from '../../API/userManager';
 
@@ -35,7 +35,7 @@ class EditComment extends Component {
             companyId: this.state.companyId
         };
 
-        CommentManager.update(editedComment, authHeader)
+        commentManager.update(editedComment, authHeader)
             .then(() => this.props.history.push("/companies"))
     }
 
@@ -45,7 +45,7 @@ class EditComment extends Component {
         const authHeader = createAuthHeaders();
             CompanyManager.getCompanies(authHeader)
             .then(allCompanies => {
-                CommentManager.getSingleComment(this.props.match.params.commentId, authHeader)
+                commentManager.getSingleComment(this.props.match.params.commentId, authHeader)
                     .then(comment => {
                         this.setState({
                             id: comment.id,
