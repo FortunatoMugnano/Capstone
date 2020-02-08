@@ -34,7 +34,7 @@ namespace Capstone.Controllers.V1
         {
             if (!string.IsNullOrWhiteSpace(q))
             {
-               
+                
                 var applicationDbContext = _context.Company.Include(c => c.User)
                     .Where(c => c.Name.Contains(q) || c.CompanyTypes.Any(ct => ct.IndustryType.Industry.Contains(q)))
                     .Include(c => c.Comments)
@@ -51,6 +51,8 @@ namespace Capstone.Controllers.V1
                         Website = company.Website,
                         Address = company.Address,
                         City = company.City,
+                        User = company.User,
+                        Comments = company.Comments,
                         IndustryTypes = company.CompanyTypes.Select((industry) => new IndustryType
                         {
                             Id = industry.Id,
@@ -69,7 +71,7 @@ namespace Capstone.Controllers.V1
 
             else
             {
-                
+
                 var applicationDbContext = _context.Company.Include(c => c.User)
                     .Include(c => c.Comments)
                     .Include(c => c.CompanyTypes)
@@ -85,6 +87,8 @@ namespace Capstone.Controllers.V1
                         Website = company.Website,
                         Address = company.Address,
                         City = company.City,
+                        User = company.User,
+                        Comments = company.Comments,
                         IndustryTypes = company.CompanyTypes.Select((industry) => new IndustryType
                         {
                             Id = industry.Id,
@@ -92,7 +96,7 @@ namespace Capstone.Controllers.V1
                         }).ToList()
 
 
-                    });
+                    }) ;
                 return Ok(await applicationDbContext.ToListAsync());
             }
             

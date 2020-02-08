@@ -13,7 +13,9 @@ import { getUser, removeUser } from './API/userManager';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EditCompany from './components/Company/EditCompany';
-
+import CommentList from './components/Comment/CommentList';
+import AddComment from './components/Comment/AddComment';
+import EditComment from './components/Comment/EditComment';
 
 class App extends Component {
   state = {
@@ -30,7 +32,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          
+        <NavBar user={this.state.user} logout={this.logout} {...this.props}/>
           <Route exact path="/login" render={() => (
             <Login onLogin={(user) => this.setState({ user })} />
           )} />
@@ -50,15 +52,24 @@ class App extends Component {
               return <EditCompany companyId={parseInt(props.match.params.companyId)} {...this.props} {...props} />
                }} />
               <Route exact path="/companies" render={(props) => {
-                return <CompanyList {...this.props} {...props} />
+                return <CompanyList {...this.props} {...props} user={this.state.user} />
               }} />
               <Route exact path="/companies/new" render={(props) => {
                 return <AddCompanyForm {...this.props} {...props} />
               }} />
+              <Route exact path="/comments" render={(props) => {
+                return <CommentList {...this.props} {...props} user={this.state.user} />
+              }} />
+               <Route exact path="/comments/new" render={(props) => {
+                return <AddComment {...this.props} {...props} />
+              }} />
+               <Route exact path="/comments/:commentId(\d+)/edit" render={props => {
+              return <EditComment commentId={parseInt(props.match.params.commentId)} {...this.props} {...props} />
+               }} />
           <Route exact path="/" render={() => {
             return this.state.user ? (
               <>
-              <NavBar user={this.state.user} logout={this.logout} {...this.props}/>
+              
               <Home {...this.props} />
              
               

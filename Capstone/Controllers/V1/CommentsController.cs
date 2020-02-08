@@ -35,10 +35,11 @@ namespace Capstone.Controllers.V1
         {
 
             var applicationDbContext = _context.Comment.Include(c => c.Company).Include(c => c.User)
-                .Select((comment) => new {
-                comment.Text, 
-                comment.Company,
-                comment.Id
+                .Select((comment) => new Comment {
+                Text = comment.Text, 
+                Company =comment.Company,
+                Id = comment.Id,
+                User =comment.User
               
             });
               
@@ -58,12 +59,14 @@ namespace Capstone.Controllers.V1
             var comment = await _context.Comment
                 .Include(c => c.Company)
                 .Include(c => c.User)
-                .Select((comment) => new {
-                    comment.Text,
-                    comment.Company,
-                    comment.Id
+               .Select((comment) => new Comment
+               {
+                   Text = comment.Text,
+                   Company = comment.Company,
+                   Id = comment.Id,
+                   User = comment.User
 
-                })
+               })
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (comment == null)
             {
@@ -144,7 +147,7 @@ namespace Capstone.Controllers.V1
             var comment = await _context.Comment.FindAsync(id);
             _context.Comment.Remove(comment);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Ok(comment);
         }
         
 
