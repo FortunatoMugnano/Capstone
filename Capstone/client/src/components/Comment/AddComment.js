@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import CompanyManager from '../../API/CompanyManager';
 import commentManager from '../../API/commentManager';
 import { createAuthHeaders } from '../../API/userManager';
+import { Button, Label, Input } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 
 
@@ -62,10 +64,10 @@ class AddComment extends Component {
             <>
                 
                     
-                        
-                        <label htmlFor="name">Text </label>
-                            <input type="textbox" required onChange={this.handleFieldChange} id="text" placeholder="Text" />
-                            <select
+                        <h3>Add a new Comment</h3>
+                        <Label htmlFor="name">Text </Label>
+                            <Input type="textarea" required onChange={this.handleFieldChange} id="text" placeholder="Text" style={{marginBottom: '10px'}} />
+                            <Input type="select"
                                 className="form-control"
                                 id="companyId"
                                 value={this.state.companyId}
@@ -77,10 +79,10 @@ class AddComment extends Component {
                                         {company.name}
                                     </option>
                                 )}
-                            </select>
+                            </Input>
                         <div className="alignRight">
-                            <button type="button" disabled={this.state.loadingStatus} onClick={this.constructNewComment}>Add a Comment
-                            </button>
+                           <Link><Button color="primary" disabled={this.state.loadingStatus} onClick={this.constructNewComment} style={{marginTop: '5px'}}>Add a Comment
+                            </Button></Link> 
                         </div>
                     
                 

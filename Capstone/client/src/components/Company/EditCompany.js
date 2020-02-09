@@ -2,7 +2,9 @@ import React, { Component } from "react"
 import CompanyManager from '../../API/CompanyManager'
 import IndustryTypeManager from '../../API/IndustryTypeManager';
 import { createAuthHeaders } from '../../API/userManager';
-import Select from 'react-select'
+import Select from 'react-select';
+import { Button, Label, Input, Form } from 'reactstrap';
+import { FormGroup } from "react-bootstrap";
 
 
 class EditCompany extends Component {
@@ -87,11 +89,12 @@ class EditCompany extends Component {
     render() {
         return (
             <>
-                <form>
-                    <fieldset>
-                        <div className="formgrid">
-                        <label htmlFor="title">Name</label>
-                            <input
+            <h3>Edit this Company</h3>
+                <Form>
+                    
+                        <FormGroup>
+                        <Label htmlFor="title">Name</Label>
+                            <Input
                                 type="text"
                                 required
                                 className="form-control"
@@ -100,8 +103,8 @@ class EditCompany extends Component {
                                 value={this.state.name}
                             />
                             
-                            <label htmlFor="website">WebSite</label>
-                            <input
+                            <Label htmlFor="website">WebSite</Label>
+                            <Input
                                 type="text"
                                 required
                                 className="form-control"
@@ -109,8 +112,8 @@ class EditCompany extends Component {
                                 id="website"
                                 value={this.state.website}
                             />
-                           <label htmlFor="country">Country</label>
-                            <input
+                           <Label htmlFor="country">Country</Label>
+                            <Input
                                 type="text"
                                 required
                                 className="form-control"
@@ -118,8 +121,8 @@ class EditCompany extends Component {
                                 id="country"
                                 value={this.state.country}
                             />
-                           <label htmlFor="city">City</label>
-                            <input
+                           <Label htmlFor="city">City</Label>
+                            <Input
                                 type="text"
                                 required
                                 className="form-control"
@@ -127,8 +130,8 @@ class EditCompany extends Component {
                                 id="city"
                                 value={this.state.city}
                             />
-                            <label htmlFor="address">Address</label>
-                            <input
+                            <Label htmlFor="address">Address</Label>
+                            <Input
                                 type="text"
                                 required
                                 className="form-control"
@@ -136,8 +139,8 @@ class EditCompany extends Component {
                                 id="address"
                                 value={this.state.address}
                             />
-                            <label htmlFor="zipCode">ZipCode</label>
-                            <input
+                            <Label htmlFor="zipCode">ZipCode</Label>
+                            <Input
                                 type="number"
                                 required
                                 className="form-control"
@@ -145,8 +148,8 @@ class EditCompany extends Component {
                                 id="zipCode"
                                 value={this.state.zipCode}
                             />
-                            <label htmlFor="city">Founded</label>
-                            <input
+                            <Label htmlFor="city">Founded</Label>
+                            <Input
                                 type="datetime-local"
                                 required
                                 className="form-control"
@@ -154,7 +157,7 @@ class EditCompany extends Component {
                                 id="founded"
                                 value={this.state.founded}
                             />
-                            <label htmlFor="companyTypes">Company Types </label>
+                            <Label htmlFor="companyTypes">Company Types </Label>
                             <Select isMulti isSearchable
                                 id="companyTypeId"
                                 value={this.state.industryTypeIds}
@@ -167,16 +170,16 @@ class EditCompany extends Component {
                                
                                 
                             </Select>
-                        </div>
+                        </FormGroup>
                         <div className="alignRight">
-                            <button
-                                type="button" disabled={this.state.loadingStatus}
+                            <Button
+                                color="success" disabled={this.state.loadingStatus}
                                 onClick={this.updateExistingCompany}
                                 className="btn btn-primary"
-                            >Update</button>
+                            >Update</Button>
                         </div>
-                    </fieldset>
-                </form>
+                   
+                </Form>
             </>
         );
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, BrowserRouter as Router, Route } from 'react-router-dom';
+import { Redirect, BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import NavBar from './components/Nav/NavBar';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
@@ -16,6 +16,7 @@ import EditCompany from './components/Company/EditCompany';
 import CommentList from './components/Comment/CommentList';
 import AddComment from './components/Comment/AddComment';
 import EditComment from './components/Comment/EditComment';
+import {CardFooter} from 'reactstrap';
 
 class App extends Component {
   state = {
@@ -29,8 +30,10 @@ class App extends Component {
   }
 
   render() {
+  
     return (
       <div className="App">
+          
           <Router>
           <NavBar user={this.state.user} logout={this.logout} {...this.props}/>
           <Route exact path="/login" render={() => (
@@ -42,8 +45,8 @@ class App extends Component {
            <Route exact path="/jobs/:jobId(\d+)" render={(props) => {
                 return <JobDetails jobId={parseInt(props.match.params.jobId)} {...this.props} {...props} />
               }} />
-              <Route exact path="/jobs/new" render={(props) => {
-                    return <FormJob {...props} />
+              <Route exact path="/jobs/new" logout={this.logout} render={(props) => {
+                    return <FormJob {...props}  />
                 }} />
                <Route exact path="/jobs/:jobId(\d+)/edit" render={props => {
               return <EditJobForm {...props} />
@@ -66,11 +69,13 @@ class App extends Component {
                <Route exact path="/comments/:commentId(\d+)/edit" render={props => {
               return <EditComment commentId={parseInt(props.match.params.commentId)} {...this.props} {...props} />
                }} />
-          <Route exact path="/" render={() => {
+             
+             <Route exact path="/" render={() => {
             return this.state.user ? (
               <>
-              
+               <h3 className="welcome">Welcome {this.state.user.username}</h3>
               <Home {...this.props} />
+             
              
               
             </>

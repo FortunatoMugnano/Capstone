@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import JobManager from '../../API/JobManager';
 import CompanyManager from '../../API/CompanyManager';
 import { createAuthHeaders } from '../../API/userManager';
+import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 
 
 
@@ -66,19 +67,19 @@ class FormJob extends Component {
 
         return (
             <>
-                <form>
-                    <fieldset>
-                        <div className="formgrid">
-                        <label htmlFor="title">Title </label>
-                            <input type="text" required onChange={this.handleFieldChange} id="title" placeholder="Title" />
-                            <label htmlFor="description">Description </label>
-                            <input type="text" required onChange={this.handleFieldChange} id="description" placeholder="Description" />
-                            <label htmlFor="salary">Salary </label>
-                            <input type="number" required onChange={this.handleNumberFieldChange} value={this.state.salary} id="salary" placeholder="Salary" />
-                            <label htmlFor="jobPostUrl">Url </label>
-                            <input type="text" required onChange={this.handleFieldChange} id="jobPostUrl" placeholder="Url" />
-                            <label htmlFor="companyId">Company </label>
-                            <select
+            <h3>Add a new Dream Job</h3>
+                <Form>
+                    <FormGroup>
+                        <Label htmlFor="title">Title </Label>
+                            <Input type="text" required onChange={this.handleFieldChange} id="title" placeholder="Title" />
+                            <Label htmlFor="description">Description </Label>
+                            <Input type="text" required onChange={this.handleFieldChange} id="description" placeholder="Description" />
+                            <Label htmlFor="salary">Salary </Label>
+                            <Input type="number" required onChange={this.handleNumberFieldChange} value={this.state.salary} id="salary" placeholder="Salary" />
+                            <Label htmlFor="jobPostUrl">Url </Label>
+                            <Input type="text" required onChange={this.handleFieldChange} id="jobPostUrl" placeholder="Url" />
+                            <Label htmlFor="companyId">Company </Label>
+                            <Input type="select"
                                 className="form-control"
                                 id="companyId"
                                 value={this.state.companyId}
@@ -90,14 +91,14 @@ class FormJob extends Component {
                                         {company.name}
                                     </option>
                                 )}
-                            </select>
+                            </Input>
+                        </FormGroup>
+                        <div className="alignRight" style={{marginTop: '5px'}}>
+                            <Button color="primary" disabled={this.state.loadingStatus} onClick={this.constructNewJob}>Add a Job
+                            </Button>
                         </div>
-                        <div className="alignRight">
-                            <button type="button" disabled={this.state.loadingStatus} onClick={this.constructNewJob}>Add a Job
-                            </button>
-                        </div>
-                    </fieldset>
-                </form>
+                   
+                </Form>
             </>
         )
     }

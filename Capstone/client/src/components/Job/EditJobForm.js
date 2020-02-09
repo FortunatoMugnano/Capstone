@@ -3,6 +3,7 @@ import JobManager from '../../API/JobManager'
 import CompanyManager from "../../API/CompanyManager"
 import { createAuthHeaders } from '../../API/userManager';
 import JobStatusManager from "../../API/JobStatusManager";
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class EditJobForm extends Component {
     state = {
@@ -84,11 +85,11 @@ class EditJobForm extends Component {
     render() {
         return (
             <>
-                <form>
-                    <fieldset>
-                        <div className="formgrid">
-                        <label htmlFor="title">Title</label>
-                            <input
+            <h3>Edit this DreamJob</h3>
+                <Form>
+                    <FormGroup>
+                        <Label htmlFor="title">Title</Label>
+                            <Input
                                 type="text"
                                 required
                                 className="form-control"
@@ -97,8 +98,8 @@ class EditJobForm extends Component {
                                 value={this.state.title}
                             />
                             
-                            <label htmlFor="description">Description</label>
-                            <input
+                            <Label htmlFor="description">Description</Label>
+                            <Input
                                 type="text"
                                 required
                                 className="form-control"
@@ -106,8 +107,8 @@ class EditJobForm extends Component {
                                 id="description"
                                 value={this.state.description}
                             />
-                           <label htmlFor="salary">Salary</label>
-                            <input
+                           <Label htmlFor="salary">Salary</Label>
+                            <Input
                                 type="number"
                                 required
                                 className="form-control"
@@ -115,8 +116,8 @@ class EditJobForm extends Component {
                                 id="salary"
                                 value={this.state.salary}
                             />
-                           <label htmlFor="description">Url</label>
-                            <input
+                           <Label htmlFor="description">Url</Label>
+                            <Input
                                 type="text"
                                 required
                                 className="form-control"
@@ -124,8 +125,8 @@ class EditJobForm extends Component {
                                 id="jobPostUrl"
                                 value={this.state.jobPostUrl}
                             />
-                            <label htmlFor="companyId">Company</label>
-                            <select
+                            <Label htmlFor="companyId">Company</Label>
+                            <Input type="select"
                                 className="form-control"
                                 id="companyId"
                                 value={this.state.companyId}
@@ -136,9 +137,9 @@ class EditJobForm extends Component {
                                         {company.name}
                                     </option>
                                 )}
-                            </select>
+                            </Input>
                             <br/>
-                            <select
+                            <Input type="select"
                                 className="form-control"
                                 id="jobStatusId"
                                 value={this.state.jobStatusId}
@@ -150,18 +151,18 @@ class EditJobForm extends Component {
                                         {status.status}
                                     </option>
                                 )}
-                            </select>
+                            </Input>
                            
-                        </div>
+                        
                         <div className="alignRight">
-                            <button
-                                type="button" disabled={this.state.loadingStatus}
+                            <Button
+                                color="success" disabled={this.state.loadingStatus}
                                 onClick={this.updateExistingJob}
                                 className="btn btn-primary"
-                            >Update</button>
+                            >Update</Button>
                         </div>
-                    </fieldset>
-                </form>
+                    </FormGroup>
+                </Form>
             </>
         );
     }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { login } from '../../API/userManager';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import '../../App.css';
 
 class Login extends Component {
   state = {
@@ -33,7 +35,10 @@ class Login extends Component {
 
   render() {
     return (
-      <form onSubmit={this.submit}>
+      <>
+      <img className="logo" src="../../images/ENTER-Q-Logo.png" alt="logo" />
+      <div className="wrapper">
+      <Form className="login" onSubmit={this.submit}>
         <h1>Login</h1>
         <ul>
           {
@@ -42,32 +47,34 @@ class Login extends Component {
             )) : null
           }
         </ul>
-        <div>
-          <label htmlFor="email">
+        <FormGroup>
+          <Label htmlFor="email">
             Email
-        </label>
-          <input
+        </Label>
+          <Input
             id="email"
             name="email"
             type="email"
             placeholder="example@email.com"
             onChange={this.handleInputChange} />
-        </div>
-        <div>
-          <label htmlFor="password">
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="password">
             Password
-        </label>
-          <input
+        </Label>
+          <Input
             id="password"
             name="password"
             type="password"
             onChange={this.handleInputChange} />
-        </div>
-        <button type="submit">Log in</button>
+        </FormGroup>
+        <Button type="submit">Log in</Button>
         <p>
           Not yet a user? <Link to="/register">Sign up</Link>
         </p>
-      </form>
+      </Form>
+      </div>
+      </>
     );
   }
 }

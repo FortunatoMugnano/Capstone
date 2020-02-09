@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { register } from '../../API/userManager';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import '../../App.css';
 
 class Register extends Component {
   state = {
@@ -38,7 +40,9 @@ class Register extends Component {
 
   render() {
     return (
-      <form onSubmit={this.submit}>
+      <>
+      <img className="logo" src="../../images/ENTER-Q-Logo.png" alt="logo" />
+      <Form onSubmit={this.submit}>
         <h1>Register</h1>
         <ul>
           {
@@ -47,56 +51,57 @@ class Register extends Component {
             )) : null
           }
         </ul>
-        <div>
-          <label htmlFor="username">
+        <FormGroup>
+          <Label htmlFor="username">
             Username
-        </label>
-          <input
+        </Label>
+          <Input
             id="username"
             name="username"
             type="text"
             required
             onChange={this.handleInputChange} />
-        </div>
-        <div>
-          <label htmlFor="email">
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="email">
             Email
-        </label>
-          <input
+        </Label>
+          <Input
             id="email"
             name="email"
             type="email"
             required
             placeholder="example@email.com"
             onChange={this.handleInputChange} />
-        </div>
-        <div>
-          <label htmlFor="password">
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="password">
             Password
-        </label>
-          <input
+        </Label>
+          <Input
             id="password"
             name="password"
             type="password"
             required
             onChange={this.handleInputChange} />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="confirmPassword">
             Confirm Password
-        </label>
-          <input
+        </Label>
+          <Input
             id="confirmPassword"
             name="confirmPassword"
             type="password"
             required
             onChange={this.handleInputChange} />
-        </div>
-        <button type="submit">Register</button>
+        </FormGroup>
+        <Button type="submit">Register</Button>
         <p>
           Already registered? <Link to="/login">Log in</Link>
         </p>
-      </form>
+      </Form>
+      </>
     );
   }
 }

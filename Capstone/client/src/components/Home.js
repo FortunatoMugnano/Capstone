@@ -3,7 +3,7 @@ import { createAuthHeaders } from '../API/userManager';
 import JobCard from '../components/Job/JobCard';
 import JobManager from '../API/JobManager';
 import { Link } from 'react-router-dom';
-
+import { Button } from 'reactstrap';
 
 
 
@@ -25,19 +25,15 @@ class Home extends Component {
   render() {
     return (
       <>
-        <h1>Enter-Q!</h1>
-  
-        
         <h1>Jobs</h1>
 
         <section className="section-content">           
-           <Link to={'/jobs/new'}><button>Add a Job</button></Link>       
+           <Link to={'/jobs/new'}><Button color="danger">Add a Job</Button></Link>       
         </section>
-        <div className="container-cards">
-                    {this.state.jobs.map(job =>
-                       
+        <div>
+          {this.state.jobs.map(job =>
                         <JobCard key={job.id} job={job}  {...this.props} />
-                    )}
+          )}
         </div>
       </>
     )
