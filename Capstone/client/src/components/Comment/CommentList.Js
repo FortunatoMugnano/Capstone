@@ -3,6 +3,7 @@ import CommentCard from './CommentCard'
 import commentManager from '../../API/commentManager';
 import { createAuthHeaders } from '../../API/userManager';
 import { Link } from 'react-router-dom';
+import { Button} from 'reactstrap';
 
 
 
@@ -29,7 +30,7 @@ class CommentList extends Component {
         return ( 
             <>
              <section className="section-content">           
-             <Link to={'/comments/new'}><button>Add a Comment</button></Link>       
+             <Link to={'/comments/new'}><Button color="danger">Add a Comment</Button></Link>       
              </section>
                 <div className="container-cards">
                     {this.state.comments.map(comment =>

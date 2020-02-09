@@ -2,7 +2,8 @@ import React, { Component } from "react"
 import commentManager from '../../API/commentManager'
 import CompanyManager from "../../API/CompanyManager"
 import { createAuthHeaders } from '../../API/userManager';
-
+import { Button, Label, Input, Form } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class EditComment extends Component {
     state = {
@@ -63,20 +64,19 @@ class EditComment extends Component {
     render() {
         return (
             <>
-                <form>
-                    <fieldset>
-                        <div className="formgrid">
-                        <label htmlFor="titexttle">Text</label>
-                            <input
-                                type="textbox"
+            <h3>Edit this Message</h3>
+                <Form>
+                        <Label htmlFor="titexttle">Text</Label>
+                            <Input
+                                type="textarea"
                                 required
                                 className="form-control"
                                 onChange={this.handleFieldChange}
                                 id="text"
                                 value={this.state.text}
                             />
-                            <label htmlFor="companyId">Company</label>
-                            <select
+                            <Label htmlFor="companyId">Company</Label>
+                            <Input type="select"
                                 className="form-control"
                                 id="companyId"
                                 value={this.state.companyId}
@@ -88,17 +88,15 @@ class EditComment extends Component {
                                         {company.name}
                                     </option>
                                 )}
-                            </select>
-                        </div>
+                            </Input>
                         <div className="alignRight">
-                            <button
-                                type="button" disabled={this.state.loadingStatus}
+                            <Link><Button
+                                color="primary" disabled={this.state.loadingStatus}
                                 onClick={this.updateExistingComment}
                                 className="btn btn-primary"
-                            >Update</button>
+                            >Update</Button></Link>
                         </div>
-                    </fieldset>
-                </form>
+                </Form>
             </>
         );
     }
