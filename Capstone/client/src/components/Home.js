@@ -25,6 +25,7 @@ class Home extends Component {
   render() {
     return (
       <>
+       <h3 className="welcome">Welcome {this.props.user.username}</h3>
         <h1>Jobs</h1>
 
         <section className="section-content">           

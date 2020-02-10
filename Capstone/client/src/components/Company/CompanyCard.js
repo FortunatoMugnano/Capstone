@@ -9,8 +9,7 @@ import { Button } from 'reactstrap';
 class CompanyCard extends Component {
     state = {
         loadingStatus: false,
-        myCard : "",
-        comments: []
+        myCard : ""
     }
 
     handleDelete = () => {
@@ -38,17 +37,6 @@ class CompanyCard extends Component {
         }
     }
 
-    getTheComments = () => {
-        const authHeader = createAuthHeaders();
-        CommentManager.getSingleComment(authHeader, this.props.company.id)
-            .then((comments) => {
-                this.setState({
-                    comments: comments
-                })
-            })
-    }
-
-
     
     render() {
         return (
@@ -58,19 +46,17 @@ class CompanyCard extends Component {
             <Card bg="light" style={{ width: '40%', alignSelf: 'center', margin: '4px'}}>
                 <Card.Header>
                     <h3><span className="card-companyName">{this.props.company.name}</span></h3>
+                    <h5>{this.props.company.website}</h5>
                 </Card.Header>
                 <Card.Body style={{  backgroundColor: '#9CADCE'}}> 
-                    <p>{this.props.company.description}</p>
-                    <p>{this.props.company.website}</p>
-                    <p>{this.props.company.city}</p>
-                    <p>{this.props.company.address}</p>
-                    <p>{this.props.company.zipCode}</p>
-                    <p>{this.props.company.country}</p>
-                    <p>{this.props.company.founded}</p>
-                    <p>{this.props.company.industryTypes.map(i => "  " + i.industry)}</p>
-                    <Link><Button color="secondary" onClick={() => { this.getTheComments()}}>View the Comments</Button></Link>       
-                <Link><Button color="info" onClick={() => { this.props.history.push(`/companies/${this.props.company.id}/edit`) }}>Edit</Button></Link>
-                <Link><Button color="danger" disabled={this.state.loadingStatus} onClick={this.handleDelete}>Delete</Button></Link>       
+                    <h4>{this.props.company.city}, {this.props.company.address}, {this.props.company.zipCode}</h4>
+                    <h4>{this.props.company.country}</h4>
+                    <h5>{this.props.company.founded}</h5>
+                    <h3>Industries: </h3>
+                    <h4>{this.props.company.industryTypes.map(i => "  " + i.industry)}</h4>
+                    <Link><Button color="secondary" onClick={() => {this.props.history.push(`/companies/${this.props.company.id}/comments`)}}>View the Comments</Button></Link>       
+                    <Link><Button color="info" onClick={() => { this.props.history.push(`/companies/${this.props.company.id}/edit`) }}>Edit</Button></Link>
+                    <Link><Button color="danger" disabled={this.state.loadingStatus} onClick={this.handleDelete}>Delete</Button></Link>       
                 </Card.Body>
             </Card>
             </>
@@ -79,17 +65,15 @@ class CompanyCard extends Component {
                 <Card bg="light" style={{ width: '40%', alignSelf: 'center', margin: '4px'}}>
                 <Card.Header> 
                     <h3> <span className="card-companyName">{this.props.company.name}</span></h3>
+                    <h5>{this.props.company.website}</h5>
                 </Card.Header>
                 <Card.Body style={{  backgroundColor: '#9CADCE'}}> 
-                    <p>{this.props.company.description}</p>
-                    <p>{this.props.company.website}</p>
-                    <p>{this.props.company.city}</p>
-                    <p>{this.props.company.address}</p>
-                    <p>{this.props.company.zipCode}</p>
-                    <p>{this.props.company.country}</p>
-                    <p>{this.props.company.founded}</p>
-                    <p>{this.props.company.industryTypes.map(i => "  " + i.industry)}</p>
-                    <Link><Button color="secondary"  onClick={() => { this.getTheComments()}}>View the Comments</Button>  </Link> 
+                    <h4>{this.props.company.city}, {this.props.company.address}, {this.props.company.zipCode}</h4>
+                    <h4>{this.props.company.country}</h4>
+                    <h5>{this.props.company.founded}</h5>
+                    <h3>Industries: </h3>
+                    <h4>{this.props.company.industryTypes.map(i => "  " + i.industry)}</h4>
+                    <Link><Button color="secondary" onClick={() => {this.props.history.push(`/companies/${this.props.company.id}/comments`)}}>View the Comments</Button></Link>
                 </Card.Body>
                 </Card>
                 </>

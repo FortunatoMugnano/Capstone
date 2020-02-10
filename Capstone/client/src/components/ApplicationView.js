@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import {  BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
 import JobDetails from './Job/JobDetails';
 import Home from './Home';
 import FormJob from './Job/FormJob';
@@ -10,15 +10,16 @@ import EditCompany from './Company/EditCompany';
 import CommentList from './Comment/CommentList';
 import AddComment from './Comment/AddComment'
 import EditComment from './Comment/EditComment';
-import NavBar from './Nav/NavBar';
+import CompanyCommentList from './Company/CompanyCommentList';
+import {CardFooter} from 'reactstrap';
+import '../App.css';
 
 class ApplicationViews extends Component {
 
     render() {
-
         return (
             <>
-               <h3 className="welcome">Welcome {this.props.user.username}</h3>
+               
                <Route exact path="/" render={(props) => {
                  return <Home {...this.props} />
                }} />
@@ -50,7 +51,10 @@ class ApplicationViews extends Component {
                <Route exact path="/comments/:commentId(\d+)/edit" render={props => {
               return <EditComment commentId={parseInt(props.match.params.commentId)} {...this.props} {...props} />
                }} />
-
+                <Route exact path="/companies/:companyId(\d+)/comments" render={props => {
+              return <CompanyCommentList companyId={parseInt(props.match.params.companyId)} {...this.props} {...props} user={this.props.user} />
+               }} />
+                
 
             </>
 

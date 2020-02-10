@@ -55,7 +55,7 @@ class CompanyList extends Component {
 				<Input type="search" style={{ width: '50%', alignSelf: 'center'}} id='searchQuery'	onChange={this.handleFieldChange} placeholder='Search by Name or Industry'></Input>
 				{this.state.searchResults.map(company => (
 					<CompanyCard
-                    key={company.id} Id={company.id} company={company}  {...this.props} username={this.props.user.username}
+                    key={company.id} Id={company.id} company={company}  {...this.props} username={this.props.user.username}  
 					/>
 				))}
 			    </section>
@@ -73,7 +73,7 @@ class CompanyList extends Component {
              </section>
                 <div className="container-cards">
                     {this.state.companies.map(company =>
-                    <CompanyCard key={company.id} Id={company.id} company={company}  {...this.props} />
+                    <CompanyCard key={company.id} Id={company.id} company={company} {...this.props}  username={this.props.user.username}   />
                     )}
                 </div>
                </>
