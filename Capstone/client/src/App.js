@@ -3,20 +3,9 @@ import { Redirect, BrowserRouter as Router, Route, withRouter } from 'react-rout
 import NavBar from './components/Nav/NavBar';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
-import Home from './components/Home';
-import JobDetails from './components/Job/JobDetails';
-import FormJob from './components/Job/FormJob';
-import EditJobForm from './components/Job/EditJobForm';
-import CompanyList from './components/Company/CompanyList';
-import AddCompanyForm from './components/Company/AddCompanyForm';
 import { getUser, removeUser } from './API/userManager';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import EditCompany from './components/Company/EditCompany';
-import CommentList from './components/Comment/CommentList';
-import AddComment from './components/Comment/AddComment';
-import EditComment from './components/Comment/EditComment';
-import {CardFooter} from 'reactstrap';
 import ApplicationView from './components/ApplicationView';
 
 class App extends Component {

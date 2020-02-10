@@ -13,7 +13,7 @@ class JobCard extends Component {
         <Card.Body>
         <Card.Title><h5>{this.props.job.description}</h5></Card.Title>
           <Card.Text>
-            <p>{this.props.job.company.name}</p>
+            <h5>{this.props.job.company.name}</h5>
           </Card.Text>
           <Card.Text>
             <p>{this.props.job.jobStatus.status}</p>

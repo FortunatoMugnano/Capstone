@@ -46,10 +46,11 @@ const handleAuthResponse = (authResponse) => {
   const { token, refreshTokenId } = authResponse;
   localStorage.setItem('token', token);
   localStorage.setItem('refresh', refreshTokenId);
-  const { email, sub } = getTokenPayload(token);
+  const { email, sub, id } = getTokenPayload(token);
   const user = {
     email,
     username: sub,
+    id: id
   };
   localStorage.setItem('user', JSON.stringify(user));
   return user;

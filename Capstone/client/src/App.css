@@ -26,7 +26,10 @@ p, li, a, input {
 h1, h2, h3, h4, h5{
   font-family: 'Cairo', sans-serif;
 }
-
+.nav {
+  border: solid;
+  border-color: #282c34;
+}
 .nav-items {
   list-style: none;
   display: flex;
@@ -66,4 +69,11 @@ h1, h2, h3, h4, h5{
 
 .welcome{
   text-decoration: underline;
+}
+.card-footer {
+  position: sticky;
+  background-color: #282c34;
+}
+.btn-danger {
+  margin: 5px;
 }

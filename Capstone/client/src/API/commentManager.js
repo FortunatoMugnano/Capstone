@@ -19,9 +19,9 @@ export default {
         .then(response => response.json());
     },
 
-      getSingleCommentWithCompanies(id, authHeader) {
+      getCompanyWithComments(id, authHeader) {
           return fetch(
-              `${baseUrl}/companies/${id}?=comments`, {
+              `${baseUrl}/companies/${id}`, {
                 headers: authHeader
               })
           .then(response => response.json());
