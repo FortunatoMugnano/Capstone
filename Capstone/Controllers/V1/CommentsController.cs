@@ -38,6 +38,7 @@ namespace Capstone.Controllers.V1
                 .Select((comment) => new Comment {
                 Text = comment.Text, 
                 Company =comment.Company,
+                CompanyId = comment.CompanyId,
                 Id = comment.Id,
                 User =comment.User
               
@@ -63,6 +64,7 @@ namespace Capstone.Controllers.V1
                {
                    Text = comment.Text,
                    Company = comment.Company,
+                   CompanyId = comment.CompanyId,
                    Id = comment.Id,
                    User = comment.User
 
