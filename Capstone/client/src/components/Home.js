@@ -32,9 +32,10 @@ class Home extends Component {
         </section>
         <div>
           {this.state.jobs.map(job =>
-                        <JobCard key={job.id} job={job}  {...this.props} />
+             <JobCard key={job.id} job={job}  {...this.props} />
           )}
         </div>
+      
       </>
     )
   }
