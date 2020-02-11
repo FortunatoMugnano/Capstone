@@ -115,7 +115,7 @@ namespace Capstone.Controllers.V1
                 
                 try
                {
-                   // job.Date = DateTime.Now;
+                   job.Date = DateTime.Now;
                     _context.Update(job);
                    await _context.SaveChangesAsync();
                }
