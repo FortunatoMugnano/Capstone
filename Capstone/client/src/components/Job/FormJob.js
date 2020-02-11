@@ -3,6 +3,7 @@ import JobManager from '../../API/JobManager';
 import CompanyManager from '../../API/CompanyManager';
 import { createAuthHeaders } from '../../API/userManager';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 
 
@@ -99,6 +100,9 @@ class FormJob extends Component {
                         </div>
                    
                 </Form>
+
+                <h5 style={{margin: '6px'}}>Don't see the company?</h5>
+                <Link to={`/companies/new`}><Button color="info">Add a Company</Button></Link>
             </>
         )
     }
