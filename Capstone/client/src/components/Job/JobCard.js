@@ -11,9 +11,7 @@ class JobCard extends Component {
 
 
     render() {
-        if(!this.props.job ){
-            return null
-        }
+        
         return (
         <Card border="light" style={{ width: '18rem' , backgroundColor: '#A035FE', border: 'solid',
          borderRadius: '10px'}}>
