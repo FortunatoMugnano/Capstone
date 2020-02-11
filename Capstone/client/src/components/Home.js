@@ -55,9 +55,7 @@ class Home extends Component {
     const authHeader = createAuthHeaders();
     JobManager.getJobs(authHeader)
       .then((jobs) => {
-        console.log(jobs)
         let newBoard = createBoard()
-        //Do all the things (filter or conditionals)
         let dreamJob = jobs.filter(job => job.jobStatusId == 1)
         let applied = jobs.filter(job => job.jobStatusId == 2)
         let interview = jobs.filter(job => job.jobStatusId == 3)
@@ -67,7 +65,8 @@ class Home extends Component {
           let newObject = {
             title: e.title,
             description: e.description,
-            company: e.company.name
+            company: e.company.name,
+            data: e
           }
           newBoard.columns[0].cards.push(newObject)
         })
@@ -127,13 +126,11 @@ class Home extends Component {
         <section className="section-content">
           <Link to={'/jobs/new'}><Button color="danger">Add a Job</Button></Link>
         </section>
-        {this.state.jobs.length ? (
           <Board renderCard={(content, { dragging }) => (
-
-            <JobCard dragging={dragging} key={content.title} job={content.data} {...this.props} />
+            <JobCard dragging={dragging}  job={content.data} {...this.props} />
           )}>{this.state.board}
           </Board>
-        ) : null}
+        
       </>
     )
   }
