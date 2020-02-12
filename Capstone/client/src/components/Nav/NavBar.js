@@ -17,17 +17,17 @@ export default function Navbar(props)  {
           {
             props.user ? (
               <>
-              <Nav defaultActiveKey="/" as="ul">
+              <Nav defaultActiveKey="/" as="ul" >
               <Nav.Item>
               <Nav.Link href="/"><img className="logo" src="../../images/ENTER-Q-Logo.png" alt="logo" /></Nav.Link>
               </Nav.Item>
-              <Nav.Item as="li">
+              <Nav.Item>
               <Nav.Link href="/companies">Companies</Nav.Link>
               </Nav.Item>
-              <Nav.Item as="li">
+              <Nav.Item>
               <Nav.Link href="/comments">Comments </Nav.Link>
               </Nav.Item>
-              <Nav.Item as="li" onClick={props.logout}>
+              <Nav.Item onClick={props.logout}>
               <Nav.Link eventKey="link-1" >Log out</Nav.Link>
               </Nav.Item>
               </Nav>

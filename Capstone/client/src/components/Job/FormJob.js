@@ -80,7 +80,7 @@ class FormJob extends Component {
                             <Label htmlFor="jobPostUrl">Url </Label>
                             <Input type="text" required onChange={this.handleFieldChange} id="jobPostUrl" placeholder="Url" />
                             <Label htmlFor="companyId">Company </Label>
-                            <Input type="select"
+                            <Input type="select" 
                                 className="form-control"
                                 id="companyId"
                                 value={this.state.companyId}
