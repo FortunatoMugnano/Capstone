@@ -46,7 +46,6 @@ class EditJobForm extends Component {
             jobStatusId: this.state.jobStatusId,
             date: new Date()
         };
-
         JobManager.update(editedJob, authHeader)
             .then(() => this.props.history.push("/"))
     }

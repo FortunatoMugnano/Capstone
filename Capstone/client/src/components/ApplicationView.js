@@ -55,7 +55,7 @@ class ApplicationViews extends Component {
               return <CompanyCommentList companyId={parseInt(props.match.params.companyId)} {...this.props} {...props} user={this.props.user} />
                }} />
                 
-
+              
             </>
 
         )
