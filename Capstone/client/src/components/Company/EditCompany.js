@@ -95,6 +95,7 @@ class EditCompany extends Component {
                         <FormGroup>
                         <Label htmlFor="title">Name</Label>
                             <Input
+                            style={{width: '50%'}}
                                 type="text"
                                 required
                                 className="form-control"
@@ -105,6 +106,7 @@ class EditCompany extends Component {
                             
                             <Label htmlFor="website">WebSite</Label>
                             <Input
+                            style={{width: '50%'}}
                                 type="text"
                                 required
                                 className="form-control"
@@ -114,6 +116,7 @@ class EditCompany extends Component {
                             />
                            <Label htmlFor="country">Country</Label>
                             <Input
+                            style={{width: '50%'}}
                                 type="text"
                                 required
                                 className="form-control"
@@ -123,6 +126,7 @@ class EditCompany extends Component {
                             />
                            <Label htmlFor="city">City</Label>
                             <Input
+                            style={{width: '50%'}}
                                 type="text"
                                 required
                                 className="form-control"
@@ -132,6 +136,7 @@ class EditCompany extends Component {
                             />
                             <Label htmlFor="address">Address</Label>
                             <Input
+                            style={{width: '50%'}}
                                 type="text"
                                 required
                                 className="form-control"
@@ -141,6 +146,7 @@ class EditCompany extends Component {
                             />
                             <Label htmlFor="zipCode">ZipCode</Label>
                             <Input
+                            style={{width: '50%'}}
                                 type="number"
                                 required
                                 className="form-control"
@@ -150,6 +156,7 @@ class EditCompany extends Component {
                             />
                             <Label htmlFor="city">Founded</Label>
                             <Input
+                            style={{width: '50%'}}
                                 type="datetime-local"
                                 required
                                 className="form-control"
@@ -159,8 +166,9 @@ class EditCompany extends Component {
                             />
                             <Label htmlFor="companyTypes">Company Types </Label>
                             <Select isMulti isSearchable
+                                style={{width: '-webkit-fill-available'}}
                                 id="companyTypeId"
-                                value={this.state.industryTypeIds}
+                                values={this.state.industryTypeIds}
 
                                 onChange={this.handleCompanyIdsFieldChange}
                                 options={this.state.companyTypes.map(type => {

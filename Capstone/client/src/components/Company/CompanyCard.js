@@ -51,10 +51,9 @@ class CompanyCard extends Component {
                 <Card.Body style={{  backgroundColor: '#9CADCE'}}> 
                     <h4>{this.props.company.city}, {this.props.company.address}, {this.props.company.zipCode}</h4>
                     <h4>{this.props.company.country}</h4>
-                    <h5>{this.props.company.founded}</h5>
                     <h3>Industries: </h3>
                     <h4>{this.props.company.industryTypes.map(i => "  " + i.industry)}</h4>
-                    <Link><Button color="secondary" onClick={() => {this.props.history.push(`/companies/${this.props.company.id}/comments`)}}>View the Comments</Button></Link>       
+                    <Link><Button style={{margin: "5px"}} color="secondary" onClick={() => {this.props.history.push(`/companies/${this.props.company.id}/comments`)}}>View the Comments</Button></Link>       
                     <Link><Button color="info" onClick={() => { this.props.history.push(`/companies/${this.props.company.id}/edit`) }}>Edit</Button></Link>
                     <Link><Button color="danger" disabled={this.state.loadingStatus} onClick={this.handleDelete}>Delete</Button></Link>       
                 </Card.Body>
@@ -70,10 +69,9 @@ class CompanyCard extends Component {
                 <Card.Body style={{  backgroundColor: '#9CADCE'}}> 
                     <h4>{this.props.company.city}, {this.props.company.address}, {this.props.company.zipCode}</h4>
                     <h4>{this.props.company.country}</h4>
-                    <h5>{this.props.company.founded}</h5>
                     <h3>Industries: </h3>
                     <h4>{this.props.company.industryTypes.map(i => "  " + i.industry)}</h4>
-                    <Link><Button color="secondary" onClick={() => {this.props.history.push(`/companies/${this.props.company.id}/comments`)}}>View the Comments</Button></Link>
+                    <Link><Button color="secondary" style={{margin: "5px"}} onClick={() => {this.props.history.push(`/companies/${this.props.company.id}/comments`)}}>View the Comments</Button></Link>
                 </Card.Body>
                 </Card>
                 </>

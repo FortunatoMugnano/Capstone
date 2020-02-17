@@ -36,7 +36,7 @@ class Login extends Component {
   render() {
     return (
       <>
-      <img className="logo" src="../../images/ENTER-Q-Logo.png" alt="logo" />
+      <img className="loginLogo"  style={{width: '500px', alignSelf: 'center'}}src="../../images/ENTER-Q-Logo.png" alt="logo" />
       <div className="wrapper">
       <Form className="login" onSubmit={this.submit}>
         <h1>Login</h1>
@@ -52,6 +52,7 @@ class Login extends Component {
             Email
         </Label>
           <Input
+          style={{width: '50%'}}
             id="email"
             name="email"
             type="email"
@@ -63,6 +64,7 @@ class Login extends Component {
             Password
         </Label>
           <Input
+          style={{width: '50%'}}
             id="password"
             name="password"
             type="password"

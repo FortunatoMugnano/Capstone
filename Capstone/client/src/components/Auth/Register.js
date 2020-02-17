@@ -41,7 +41,7 @@ class Register extends Component {
   render() {
     return (
       <>
-      <img className="logo" src="../../images/ENTER-Q-Logo.png" alt="logo" />
+      <img className="logo" style={{width: '500px', alignSelf: 'center', height: "150px"}} src="../../images/ENTER-Q-Logo.png" alt="logo" />
       <Form onSubmit={this.submit}>
         <h1>Register</h1>
         <ul>
@@ -56,6 +56,7 @@ class Register extends Component {
             Username
         </Label>
           <Input
+          style={{width: '50%'}}
             id="username"
             name="username"
             type="text"
@@ -67,6 +68,7 @@ class Register extends Component {
             Email
         </Label>
           <Input
+          style={{width: '50%'}}
             id="email"
             name="email"
             type="email"
@@ -79,6 +81,7 @@ class Register extends Component {
             Password
         </Label>
           <Input
+          style={{width: '50%'}}
             id="password"
             name="password"
             type="password"
@@ -90,6 +93,7 @@ class Register extends Component {
             Confirm Password
         </Label>
           <Input
+          style={{width: '50%'}}
             id="confirmPassword"
             name="confirmPassword"
             type="password"

@@ -72,15 +72,15 @@ class FormJob extends Component {
                 <Form>
                     <FormGroup>
                         <Label htmlFor="title">Title </Label>
-                            <Input type="text" required onChange={this.handleFieldChange} id="title" placeholder="Title" />
+                            <Input style={{width: '50%'}} type="text" required onChange={this.handleFieldChange} id="title" placeholder="Title" />
                             <Label htmlFor="description">Description </Label>
-                            <Input type="text" required onChange={this.handleFieldChange} id="description" placeholder="Description" />
+                            <Input style={{width: '50%'}} type="text" required onChange={this.handleFieldChange} id="description" placeholder="Description" />
                             <Label htmlFor="salary">Salary </Label>
-                            <Input type="number" required onChange={this.handleNumberFieldChange} value={this.state.salary} id="salary" placeholder="Salary" />
+                            <Input style={{width: '50%'}} type="number" required onChange={this.handleNumberFieldChange} value={this.state.salary} id="salary" placeholder="Salary" />
                             <Label htmlFor="jobPostUrl">Url </Label>
-                            <Input type="text" required onChange={this.handleFieldChange} id="jobPostUrl" placeholder="Url" />
+                            <Input style={{width: '50%'}} type="text" required onChange={this.handleFieldChange} id="jobPostUrl" placeholder="Url" />
                             <Label htmlFor="companyId">Company </Label>
-                            <Input type="select" 
+                            <Input style={{width: '50%'}} type="select" 
                                 className="form-control"
                                 id="companyId"
                                 value={this.state.companyId}
@@ -102,7 +102,7 @@ class FormJob extends Component {
                 </Form>
 
                 <h5 style={{margin: '6px'}}>Don't see the company?</h5>
-                <Link to={`/companies/new`}><Button color="info">Add a Company</Button></Link>
+                <Link onClick={() => this.props.history.push(`/companies/new`)} className='click'><Button color="info">Add a Company</Button></Link>
             </>
         )
     }

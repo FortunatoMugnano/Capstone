@@ -4,6 +4,7 @@ import IndustryTypeManager from '../../API/IndustryTypeManager';
 import { createAuthHeaders } from '../../API/userManager';
 import Select from 'react-select'
 import { Button, Label, Input } from 'reactstrap';
+import { Link} from 'react-router-dom';
 
 
 
@@ -66,11 +67,17 @@ class AddCompanyForm extends Component {
             founded: this.state.founded
         };
         CompanyManager.post(company, authHeader)
-            .then(() => this.props.history.push("/companies"))
-
-
-        
+            .then(() => this.props.history.push("/companies"))        
     };
+
+
+     customStyles = {
+        option: (provided, state) => ({
+          ...provided,
+           width: '100%',
+           alignSelf: "center"
+        }),
+    }
 
     render() {
 
@@ -81,21 +88,22 @@ class AddCompanyForm extends Component {
                     
                         <h3>Add a new Company</h3>
                         <Label htmlFor="name">Name </Label>
-                            <Input type="text" required onChange={this.handleFieldChange} id="name" placeholder="Name" />
+                            <Input style={{width: '50%', alignSelf: "center"}} type="text" required onChange={this.handleFieldChange} id="name" placeholder="Name" />
                             <Label htmlFor="website">Web Site </Label>
-                            <Input type="text" required onChange={this.handleFieldChange} id="website" placeholder="WebSite" />
+                            <Input style={{width: '50%', alignSelf: "center"}} type="text" required onChange={this.handleFieldChange} id="website" placeholder="WebSite" />
                             <Label htmlFor="country">Country </Label>
-                            <Input type="text" required onChange={this.handleFieldChange}  id="country" placeholder="Country" />
+                            <Input  style={{width: '50%', alignSelf: "center"}} type="text" required onChange={this.handleFieldChange}  id="country" placeholder="Country" />
                             <Label htmlFor="city">City </Label>
-                            <Input type="text" required onChange={this.handleFieldChange} id="city" placeholder="City" />
+                            <Input style={{width: '50%', alignSelf: "center"}} type="text" required onChange={this.handleFieldChange} id="city" placeholder="City" />
                             <Label htmlFor="address">Address </Label>
-                            <Input type="text" required onChange={this.handleFieldChange} id="address" placeholder="Address" />
+                            <Input style={{width: '50%', alignSelf: "center"}} type="text" required onChange={this.handleFieldChange} id="address" placeholder="Address" />
                             <Label htmlFor="city">Zip Code </Label>
-                            <Input type="number" required onChange={this.handleNumberFieldChange} id="zipCode" placeholder="ZipCode" />
+                            <Input style={{width: '50%', alignSelf: "center"}} type="number" required onChange={this.handleNumberFieldChange} id="zipCode" placeholder="ZipCode" />
                             <Label htmlFor="founded">Founded </Label>
-                            <Input type="date" required onChange={this.handleFieldChange} id="founded" placeholder="Founded" />
+                            <Input style={{width: '50%', alignSelf: "center"}} type="date" required onChange={this.handleFieldChange} id="founded" placeholder="Founded" />
                             <Label htmlFor="companyTypes">Company Types </Label>
                             <Select isMulti isSearchable
+                             styles={this.customStyles}
                                 id="companyTypeId"
                                 value={this.state.industryTypeIds}
 
@@ -109,8 +117,8 @@ class AddCompanyForm extends Component {
                             </Select>
                         
                         <div className="alignRight" style={{marginTop: '5px'}}>
-                            <Button color="primary" disabled={this.state.loadingStatus} onClick={this.constructNewCompany}>Add a Company
-                            </Button>
+                           <Link><Button color="primary" disabled={this.state.loadingStatus} onClick={this.constructNewCompany}>Add a Company
+                            </Button></Link>
                         </div>
                     
                 

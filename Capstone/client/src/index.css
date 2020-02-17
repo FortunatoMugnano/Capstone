@@ -1,8 +1,6 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: 'Nanum Gothic', sans-serif, 'Cairo', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -18,4 +16,8 @@ p, li, a, input {
 
 h1, h2, h3, h4, h5{
   font-family: 'Cairo', sans-serif;
+}
+
+.root::-webkit-scrollbar {
+  display: none;
 }
