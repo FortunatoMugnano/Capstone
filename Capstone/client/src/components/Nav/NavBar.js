@@ -30,7 +30,9 @@ export default function Navbar(props)  {
               <Nav.Item onClick={props.logout}>
               <Nav.Link eventKey="link-1" >Log out</Nav.Link>
               </Nav.Item>
+              <p className="welcome">Welcome {props.user.username}</p>
               </Nav>
+             
               
              </>
             ) : (

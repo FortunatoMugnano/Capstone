@@ -89,6 +89,7 @@ class EditJobForm extends Component {
                     <FormGroup>
                         <Label htmlFor="title">Title</Label>
                             <Input
+                            style={{width: '50%'}}
                                 type="text"
                                 required
                                 className="form-control"
@@ -99,6 +100,7 @@ class EditJobForm extends Component {
                             
                             <Label htmlFor="description">Description</Label>
                             <Input
+                            style={{width: '50%'}}
                                 type="text"
                                 required
                                 className="form-control"
@@ -108,6 +110,7 @@ class EditJobForm extends Component {
                             />
                            <Label htmlFor="salary">Salary</Label>
                             <Input
+                            style={{width: '50%'}}
                                 type="number"
                                 required
                                 className="form-control"
@@ -117,6 +120,7 @@ class EditJobForm extends Component {
                             />
                            <Label htmlFor="description">Url</Label>
                             <Input
+                            style={{width: '50%'}}
                                 type="text"
                                 required
                                 className="form-control"
@@ -125,7 +129,9 @@ class EditJobForm extends Component {
                                 value={this.state.jobPostUrl}
                             />
                             <Label htmlFor="companyId">Company</Label>
-                            <Input type="select"
+                            <Input
+                                style={{width: '50%'}} 
+                                type="select"
                                 className="form-control"
                                 id="companyId"
                                 value={this.state.companyId}
@@ -138,7 +144,9 @@ class EditJobForm extends Component {
                                 )}
                             </Input>
                             <br/>
-                            <Input type="select"
+                            <Input
+                                style={{width: '50%'}} 
+                                type="select"
                                 className="form-control"
                                 id="jobStatusId"
                                 value={this.state.jobStatusId}
@@ -158,6 +166,7 @@ class EditJobForm extends Component {
                                 color="success" disabled={this.state.loadingStatus}
                                 onClick={this.updateExistingJob}
                                 className="btn btn-primary"
+                                style={{margin: '5px'}}
                             >Update</Button>
                         </div>
                     </FormGroup>

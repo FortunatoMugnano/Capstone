@@ -66,8 +66,12 @@ class AddComment extends Component {
                     
                         <h3>Add a new Comment</h3>
                         <Label htmlFor="name">Text </Label>
-                            <Input type="textarea" required onChange={this.handleFieldChange} id="text" placeholder="Text" style={{marginBottom: '10px'}} />
+                            <Input type="textarea"  
+                             required onChange={this.handleFieldChange} 
+                             id="text" placeholder="Comment Here"
+                            style={{marginBottom: '10px', width: '50%', alignSelf: "center"}} />
                             <Input type="select"
+                                style={{width: '50%', alignSelf: "center"}}
                                 className="form-control"
                                 id="companyId"
                                 value={this.state.companyId}

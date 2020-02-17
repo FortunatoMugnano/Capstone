@@ -53,7 +53,7 @@ class JobDetails extends Component {
         return (
 
             <Card bg="light" style={{ width: '90%', alignSelf: 'center'}}>
-                <Card.Header><h3>Title: <span>{this.state.title}</span></h3></Card.Header>
+                <Card.Header><h3><span>{this.state.title}</span></h3></Card.Header>
                     <Card.Body style={{ backgroundColor: '#9CADCE'}}>
                         <Card.Title>
                         <h3>Description:

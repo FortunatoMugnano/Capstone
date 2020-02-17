@@ -17,7 +17,10 @@ nav {
   font-size: calc(10px + 1vmin);
   color: rgba(255, 255, 255, .8);
   padding: 0 20px;;
+  font-weight: bolder;
 }
+
+
 
 p, li, a, input {
   font-family: 'Nanum Gothic', sans-serif;
@@ -39,6 +42,10 @@ h1, h2, h3, h4, h5{
 .nav-item {
   padding: 0 10px;
   cursor: pointer;
+}
+
+.nav-link{
+  font-weight: bolder;
 }
 
 .nav-item a {
@@ -68,7 +75,9 @@ h1, h2, h3, h4, h5{
 }
 
 .welcome{
-  text-decoration: underline;
+    align-self: center;
+    margin-left: auto;
+    padding-top: 6px;
 }
 .card-footer {
   position: sticky;
@@ -77,3 +86,17 @@ h1, h2, h3, h4, h5{
 .btn-danger {
   margin: 5px;
 }
+
+.form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+

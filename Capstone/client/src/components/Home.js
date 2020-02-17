@@ -164,27 +164,26 @@ class Home extends Component {
   render() {
     return (
       <>
-        <h3 className="welcome">Welcome {this.props.user.username}</h3>
         <h1>Your Jobs</h1>
         <section className="section-content">
           <Link to={'/jobs/new'}><Button color="danger">Add a Job</Button></Link>
         </section>
         {
           this.state.jobs.length ? (
-            <Board onCardDragEnd={this.handleCardDrag}
+            <Board onCardDragEnd={this.handleCardDrag} 
               renderCard={(content, { dragging }) => (
                 <Card dragging={dragging} border="light" style={{
-                  width: '13rem', height: '21rem', backgroundColor: '#A035FE', border: 'solid',
-                  borderRadius: '10px', display: "flex"
-                }}>
+                  width: '13rem', height: '19rem', backgroundColor: '#A035FE', border: 'solid',
+                  borderRadius: '10px', display: "flex", flexDirection: 'column',
+                  justifyContent: 'space-evenly', fontWeight: 'bolder'}}>
                   <Link onClick={() => this.props.history.push(`/jobs/${content.id}`)}><Card.Header>
-                    <h4 style={{ color: '#dee2e6' }}>{content.title}</h4>
+                    <h5 style={{ color: '#dee2e6', fontWeight: "bolder" }}>{content.title}</h5>
                   </Card.Header></Link>
                   <Card.Body>
-                    <h4 style={{ color: 'white' }}>Title</h4>
-                    <h5>{content.description}</h5>
-                    <h4 style={{ color: 'white' }}>Company</h4>
-                    <h5>{content.companyName}</h5>
+                    <h5 style={{ color: 'white', fontWeight: 'bolder' }}>Title: </h5> 
+                    <p style={{color: "white"}}>{content.description}</p>
+                    <h5 style={{ color: 'white', fontWeight: 'bolder' }}>Company: </h5>
+                    <p style={{ color: "white"}}>{content.companyName}</p>
                   </Card.Body>
                   
                 </Card>

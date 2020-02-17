@@ -68,16 +68,16 @@ class EditComment extends Component {
                 <Form>
                         <Label htmlFor="titexttle">Text</Label>
                             <Input
+                                style={{width: '50%', alignSelf: "center", marginLeft: '330px'}}
                                 type="textarea"
                                 required
-                                className="form-control"
                                 onChange={this.handleFieldChange}
                                 id="text"
                                 value={this.state.text}
                             />
                             <Label htmlFor="companyId">Company</Label>
                             <Input type="select"
-                                className="form-control"
+                                style={{width: '50%', alignSelf: "center", marginLeft: '330px'}}
                                 id="companyId"
                                 value={this.state.companyId}
                                 onChange={this.handleNumberFieldChange}
@@ -94,6 +94,7 @@ class EditComment extends Component {
                                 color="primary" disabled={this.state.loadingStatus}
                                 onClick={this.updateExistingComment}
                                 className="btn btn-primary"
+                                style={{margin: "5px"}}
                             >Update</Button></Link>
                         </div>
                 </Form>

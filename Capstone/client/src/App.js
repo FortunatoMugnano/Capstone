@@ -36,7 +36,7 @@ class App extends Component {
             return this.state.user ? (
               <>
               
-              <NavBar user={this.state.user} logout={this.logout} {...this.props}/>
+              <NavBar user={this.state.user} logout={this.logout} {...this.props} />
               <ApplicationView {...this.props} user={this.state.user} />
               
             </>
